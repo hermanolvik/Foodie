@@ -1,10 +1,15 @@
+
 import openai
 
 # Initialize the OpenAI API
 openai.api_key = "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"
 
+input("Please write a nice recipe of the following ingredients: ")
+ingredients  = req
 # Text you want to send to the API
-prompt = "Please write a nice recipe of the following ingredients: bacon, zucchini, potato. Recipe:"
+prompt = "Please write a nice recipe of the following ingredients: "
+
+
 
 # Make API request
 response = openai.Completion.create(
