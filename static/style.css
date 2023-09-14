@@ -94,5 +94,16 @@ nav a.active {
 .AboutField{
 
 }
+/*======================= Recipie Page ========================*/
+.RecipiePage{
+    padding : 20px;
+    margin: auto;
+    text-align : left;
+    max-width: 720px;
+    text-after-overflow: 10px ;
+}
+.RecipieField{
+
+}
 
 /*======================= END ========================*/
