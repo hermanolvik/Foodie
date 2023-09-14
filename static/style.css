@@ -83,6 +83,28 @@ nav a.active {
 .search-button:hover, .something-else:hover {
     background-color: #f0f0f0;
 }
+/*======================= About Page ========================*/
+.AboutPage{
+    padding : 20px;
+    margin: auto;
+    text-align : left;
+    max-width: 720px;
+   text-after-overflow: 10px ;
+}
+.AboutField{
+
+}
+/*======================= Recipie Page ========================*/
+.RecipiePage{
+    padding : 20px;
+    margin: auto;
+    text-align : left;
+    max-width: 720px;
+    text-after-overflow: 10px ;
+}
+.RecipieField{
+
+}
 
 /*======================= END ========================*/
 
