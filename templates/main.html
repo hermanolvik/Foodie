@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Page 1{% endblock %}
+
+{% block content %}
+<div class="search">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Search Logo" height="92" width="272">
+    <div class="search-container">
+        <input type="text" name="q" class="search-box" placeholder="Search Logo">
+        <button type="submit" class="search-button" id="search-button">Search</button>
+        <button type="submit" class="something-else" id="something-else">Feeling Lazy</button>
+
+    </div>
+</div>
+{% endblock %}
