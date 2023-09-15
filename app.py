@@ -75,7 +75,10 @@ def main():
 
 @app.route('/page_1')
 def page_1():
-    return render_template('page1.html')
+    title = request.args.get("title")
+    ingredients = request.args.get('ingredients')
+    instructions = request.args.get('instructions')
+    return render_template('page1.html', title=title, ingredients=ingredients, instructions=instructions)
 
 
 @app.route('/page_2')
