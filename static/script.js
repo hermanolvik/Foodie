@@ -17,15 +17,14 @@ document.getElementById('search-button').addEventListener('click', function () {
     })
         .then(response => response.json())
         .then(data => {
-            let title = data.title;
-            let ingredients = data.ingredients.replace(/\n/g, '<br>');
-            let instructions = data.instructions.replace(/\n/g, '<br>');
+            
 
-            const recipeElement = document.createElement('div');
-            recipeElement.innerHTML = `<h2>${title}</h2><h3>Ingredients:</h3><p>${ingredients}</p><h3>Instructions:</h3><p>${instructions}</p>`;
-
-            // Append it to the main content or to a specific container
-            document.querySelector('main').appendChild(recipeElement);
+            let Title = data.title;
+            let Ingredients = data.ingredients.replace(/\n/g, '<br>');
+            let Instructions = data.instructions.replace(/\n/g, '<br>');
+            location.href ="/page_1?title=" + Title + "&ingredients=" + Ingredients + "&instructions=" + Instructions;
+            
+            
         })
         .catch(error => console.error('Error:', error));
 });
