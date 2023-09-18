@@ -29,8 +29,19 @@ document.getElementById('search-button').addEventListener('click', function () {
             let Instructions = data.instructions.replace(/\n/g, '<br>');
             //Sending the variables up to the app.py for the route of page_1 in flask
             location.href ="/page_1?title=" + Title + "&ingredients=" + Ingredients + "&instructions=" + Instructions;
+        
             
             
         })
         .catch(error => console.error('Error:', error));
+});
+
+
+
+document.getElementById('something-else').addEventListener('click', function() {
+    // Specify the URL you want to open
+    var newUrl = 'https://www.foodora.se'; // Replace with your desired URL
+
+    // Open the URL in the current window
+    window.location.href = newUrl;
 });
