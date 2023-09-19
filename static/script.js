@@ -45,3 +45,27 @@ document.getElementById('something-else').addEventListener('click', function() {
     // Open the URL in the current window
     window.location.href = newUrl;
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const dropdown = document.querySelector(".dropdown");
+    const checkboxes = document.querySelectorAll(".dropdown-content input[type='checkbox']");
+
+    // Toggle the dropdown when the button is clicked
+    dropdown.addEventListener("click", function () {
+        this.classList.toggle("active");
+    });
+
+    // Close the dropdown when the user clicks outside of it
+    window.addEventListener("click", function (event) {
+        if (!dropdown.contains(event.target)) {
+            dropdown.classList.remove("active");
+        }
+    });
+
+    // Handle checkbox selections
+    checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener("change", function () {
+            // You can handle checkbox selections here
+            console.log("Selected value: " + this.value + ", Checked: " + this.checked);
+        });
+    });
+});
