@@ -6,10 +6,13 @@
 <div class = "RecipiePage">
     <h1>{{ title }}</h1>
 
+    <img id="recipe-image" src="{{ recipe_image_url }}" alt="" style="display: none;">
+
     <p>{{ ingredients | safe }}</p>
 
     <p>{{ instructions | safe }}</p>
 
 </div>
 
+<script src="{{ url_for('static', filename='page1.js') }}"></script>
 {% endblock %}

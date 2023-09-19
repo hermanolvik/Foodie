@@ -28,7 +28,7 @@ document.getElementById('search-button').addEventListener('click', function () {
             let Ingredients = data.ingredients.replace(/\n/g, '<br>');
             let Instructions = data.instructions.replace(/\n/g, '<br>');
             //Sending the variables up to the app.py for the route of page_1 in flask
-            location.href ="/page_1?title=" + Title + "&ingredients=" + Ingredients + "&instructions=" + Instructions;
+            location.href ="/recipe?title=" + Title + "&ingredients=" + Ingredients + "&instructions=" + Instructions;
         
             
             
