@@ -7,9 +7,40 @@
     <img src="{{ url_for('static', filename='logo.png') }}" alt="Search Logo" height="92" width="272">
     <div class="search-container">
         <input type="text" name="q" class="search-box" placeholder="Search Logo">
+
         <button type="submit" class="search-button" id="search-button">Search</button>
         <button type="submit" class="something-else" id="something-else">Feeling Lazy</button>
-
+        <div></div>
+            <label for='Portions-dd'><b>Portions</b></label>
+            <select id='Portions-dd' name='Portions'>
+                <option value=''></option>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+            </select>
+        <div class = "dropdown">
+            <button class="dropbtn">Dietary Restrictions</button>
+            <div class="dropdown-content">
+                <label><input type="checkbox" value="lactose">Lactose</input></label>
+                <label><input type="checkbox" value="gluten">Gluten</input></label>
+                <label><input type="checkbox" value="vegetarian">Vegetarian</input></label>
+                <label><input type="checkbox" value="vegan">Vegan</input></label>
+                <label><input type="checkbox" value="pescetarian">Pescetarian</input></label>
+                <label><input type="checkbox" value="kosher">Kosher</input></label>
+                <label><input type="checkbox" value="keto">Keto</input></label>
+                <label><input type="checkbox" value="fishAllergy">Fish Allergy</input></label>
+                <label><input type="checkbox" value="nutAllergy">Nut Allergy</input></label>
+                <label><input type="checkbox" value="eggAllergy">Egg Allergy</input></label>
+                <label><input type="checkbox" value="soyAllergy">Soy Allergy</input></label>
+                <label><input type="checkbox" value="canibalism">Canibalism</input></label>
+            </div>
+        </div>
     </div>
 </div>
 
