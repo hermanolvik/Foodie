@@ -66,6 +66,16 @@ def generate_recipe(json_object):
     return parsed_recipe
 
 
+def generate_recipe_image(title):
+    response = openai.Image.create(
+        prompt="a delicious and beautiful serving of the following recipe: " + title,
+        n=1,
+        size="256x256"
+    )
+    image_url = response['data'][0]['url']
+    return image_url
+
+
 @app.route("/")
 @app.route("/home")
 def main():
@@ -73,12 +83,13 @@ def main():
     return render_template('main.html')
 
 
-@app.route('/page_1')
-def page_1():
+@app.route('/recipe')
+def recipe():
     title = request.args.get("title")
     ingredients = request.args.get('ingredients')
     instructions = request.args.get('instructions')
-    return render_template('page1.html', title=title, ingredients=ingredients, instructions=instructions)
+    recipe_image_url = generate_recipe_image(title)
+    return render_template('page1.html', title=title, ingredients=ingredients, instructions=instructions, recipe_image_url=recipe_image_url)
 
 
 @app.route('/page_2')
