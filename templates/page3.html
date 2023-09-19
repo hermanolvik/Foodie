@@ -35,19 +35,46 @@
         </div>
     </div>
 
-    <div class="DropDowns" onclick="toggleDropdown(this)">
-        <h1>TJOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</h1>
-        <div class="dropdown-content" >
-            <a>HEJHEJEHJ</a>
-            <p>This is the expanded content.</p>
+    <div class="DropDowns" >
+        <div class="dropdown" >
+            
+            <h1>What can i do to minimize my food waste?</h1>
+            <img class="arrow-icon" src="{{ url_for('static', filename='arrow.png') }}" alt="Up Arrow" >
+            <div class="dropdown-content">
+                <a>Hmm</a>
+                <p>Try harder</p>
+            </div>
+        </div>
+    
+        <div class="dropdown" onclick="toggleDropdown(this)">
+            <img class="arrow-icon" src="{{ url_for('static', filename='arrow.png') }}" alt="Up Arrow">
+            <h1>Why can i not search for recipes that includes poisonous ingredients? </h1>
+            <div class="dropdown-content">
+                <a>U serious?</a>
+                <p>Getting a bit worried here</p>
+            </div>
+        </div>
+
+        <div class="dropdown" onclick="toggleDropdown(this)">
+            <img class="arrow-icon" src="{{ url_for('static', filename='arrow.png') }}" alt="Up Arrow">
+            <h1>Do you track my search history and share it to local authorities?</h1>
+            <div class="dropdown-content">
+                <a>No</a>
+                <p>But starting to think we should</p>
+            </div>
+        </div>
+
+        <div class="dropdown" onclick="toggleDropdown(this)">
+            <img class="arrow-icon" src="{{ url_for('static', filename='arrow.png') }}" alt="Up Arrow">
+            <h1>Should i be worried?</h1>
+            <div class="dropdown-content">
+                <a>Yes</a>
+                <p>Police is on their way</p>
+            </div>
         </div>
     </div>
 </div>
 
-<script>
-    function toggleDropdown(element) {
-        element.classList.toggle("open");
-    }
-</script>
+<script src="{{ url_for('static', filename='about.js') }}"></script>
 
 {% endblock %}
