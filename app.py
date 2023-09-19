@@ -9,6 +9,26 @@ openai.api_key = "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"
 app = Flask(__name__, static_folder='static')
 
 
+# Number of servings
+
+fixed_portions = 5
+portions = list(range(1, fixed_portions + 1))
+# Dietary restrictions
+diet_restrictions = ['Lactose', 'Gluten', 'Vegetarian', 'Vegan',
+                'Pescetarian', 'Kosher', 'Keto', 'Fish Allergy', 'Nut Allergy',
+                'Egg Allergy', 'Soy Allergy', 'Canibalism']
+
+# Kitchen
+kitchens = {
+    'All',
+    'Sweden',
+    'England',
+    'Greece',
+    'India',
+    'Japan'
+}
+
+
 def parse_recipe(generated_text):
     # Initialize empty dictionary to store recipe components
     recipe_json = {'title': '', 'ingredients': '', 'instructions': ''}
@@ -80,7 +100,7 @@ def generate_recipe_image(title):
 @app.route("/home")
 def main():
     # path = os.path.join(os.path.dirname(__file__), 'Front-End', 'main.html')
-    return render_template('main.html')
+    return render_template('main.html', portions=portions, diet_restrictions=diet_restrictions, kitchens=kitchens)
 
 
 @app.route('/recipe')
