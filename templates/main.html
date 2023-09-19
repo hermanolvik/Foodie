@@ -10,38 +10,81 @@
 
         <button type="submit" class="search-button" id="search-button">Search</button>
         <button type="submit" class="something-else" id="something-else">Feeling Lazy</button>
-        <div></div>
-            <label for='Portions-dd'><b>Portions</b></label>
-            <select id='Portions-dd' name='Portions'>
-                <option value=''></option>
-                <option value='1'>1</option>
-                <option value='2'>2</option>
-                <option value='3'>3</option>
-                <option value='4'>4</option>
-                <option value='5'>5</option>
-                <option value='6'>6</option>
-                <option value='7'>7</option>
-                <option value='8'>8</option>
-                <option value='9'>9</option>
-            </select>
-        <div class = "dropdown">
-            <button class="dropbtn">Dietary Restrictions</button>
-            <div class="dropdown-content">
-                <label><input type="checkbox" value="lactose">Lactose</input></label>
-                <label><input type="checkbox" value="gluten">Gluten</input></label>
-                <label><input type="checkbox" value="vegetarian">Vegetarian</input></label>
-                <label><input type="checkbox" value="vegan">Vegan</input></label>
-                <label><input type="checkbox" value="pescetarian">Pescetarian</input></label>
-                <label><input type="checkbox" value="kosher">Kosher</input></label>
-                <label><input type="checkbox" value="keto">Keto</input></label>
-                <label><input type="checkbox" value="fishAllergy">Fish Allergy</input></label>
-                <label><input type="checkbox" value="nutAllergy">Nut Allergy</input></label>
-                <label><input type="checkbox" value="eggAllergy">Egg Allergy</input></label>
-                <label><input type="checkbox" value="soyAllergy">Soy Allergy</input></label>
-                <label><input type="checkbox" value="canibalism">Canibalism</input></label>
+        <br><
+
+
+        <h2>Number of servings?:</h2>
+        <body>
+            <form>
+                <label for="portions">Select a number:</label>
+                <select id="portions" name="portions">
+                    {% for port in portions %}
+                        <option value="{{ port }}">{{ port }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </body>
+
+
+        <br>
+        <head>
+            <title>Kitchen Selection</title>
+            <style>
+                .checkbox-group {
+                    display: inline-block;
+                    margin-right: 10px;
+                }
+            </style>
+            <head>
+                <title>Country Selection</title>
+                <style>
+                    .radio-group {
+                        display: inline-block;
+                        margin-right: 10px;
+                    }
+                </style>
+            </head>
+            <div class="dropdown">
+                <h2>Any dietary restrictions?:</h2>
+                <div class="dropdown-content">
+                    {%for diet in diet_restrictions%}
+                    <label><input type="checkbox" value={{diet}}>{{diet}}</input></label>
+                    {%endfor%}
+                </div>
             </div>
-        </div>
+            <br>
     </div>
+
+    <head>
+        <title>Kitchen Selection</title>
+        <style>
+            .radio-group {
+                display: inline-block;
+                margin-right: 10px;
+            }
+        </style>
+        <head>
+            <title>Country Selection</title>
+            <style>
+                .radio-group {
+                    display: inline-block;
+                    margin-right: 10px;
+                }
+            </style>
+        </head>
+    <body>
+    <form>
+        <h2>Select a Kitchen:</h2>
+        {% for kitchen in kitchens %}
+        <div class="radio-group">
+            <input type="radio" id="{{ kitchen }}" name="kitchen" value="{{ kitchen }}">
+            <label for="{{ kitchen }}">{{ kitchen }}</label>
+        </div>
+        {% endfor %}
+    </form>
+    </body>
+
+
 </div>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
