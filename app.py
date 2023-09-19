@@ -89,7 +89,7 @@ def recipe():
     ingredients = request.args.get('ingredients')
     instructions = request.args.get('instructions')
     recipe_image_url = generate_recipe_image(title)
-    return render_template('page1.html', title=title, ingredients=ingredients, instructions=instructions, recipe_image_url=recipe_image_url)
+    return render_template('recipe.html', title=title, ingredients=ingredients, instructions=instructions, recipe_image_url=recipe_image_url)
 
 
 @app.route('/page_2')
