@@ -3,13 +3,45 @@
 {% block title %}Page 1{% endblock %}
 
 {% block content %}
-<div class = "RecipiePage">
-    <h1>{{ title }}</h1>
+<div class="RecipiePage">
 
-    <p>{{ ingredients | safe }}</p>
+    <div class="RoundedBox title">
+        <div class="TitleBox">
+            <h1>{{ title }}</h1>
+            <p>Information about the dish <br><br>
+                Where does it come from <br><br>
+                Allergens? <br><br>
+                Time it takes to make etc.
+            </p>     
+        </div>
+        <div class="ImageBox">
+            <img class="StockPic" src="{{ url_for('static', filename='ProgrammingHumor.png') }}">
+        </div>
+    </div>
 
-    <p>{{ instructions | safe }}</p>
-
+    <div class="ContentWrapper">
+        <div class="IngredientsContainer">
+            <div class="Ingredients">
+                {% for ingredient in ingredients.split('<br>') %}
+                    {% if ingredient.strip() %}
+                        {% if loop.index == 1 %}
+                            <h1>{{ ingredient | safe }}</h1>
+                        {% else %}
+                            <div class="SquareBox">
+                                <p>{{ ingredient | safe }}</p>
+                            </div>
+                        {% endif %}   
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="RoundedBox instructions">
+            <p>{{ instructions | safe }}</p>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
+
+
