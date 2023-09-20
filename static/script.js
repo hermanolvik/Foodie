@@ -33,8 +33,7 @@ document.getElementById('search-button').addEventListener('click', function () {
             let Instructions = data.instructions.replace(/\n/g, '<br>');
             //Sending the variables up to the app.py for the route of page_1 in flask
 
-            // Hide the loading animation
-            document.getElementById('Layer_1').style.display = 'none';
+            
 
             location.href ="/recipe?title=" + Title + "&ingredients=" + Ingredients + "&instructions=" + Instructions;
 
@@ -44,8 +43,7 @@ document.getElementById('search-button').addEventListener('click', function () {
             
         })
         .catch(error => console.error('Error:', error));
-        // Hide the loading animation
-        document.getElementById('Layer_1').style.display = 'none';
+        
 });
 
 
