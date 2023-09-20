@@ -126,15 +126,17 @@ nav a.active {
     margin: 0 auto; /* Centrera elementet horisontellt */
     height: auto;
     overflow: visible;
-    z-index: 999;
+    z-index: 1;
     top: 80%;
-    /* hidden*/
-    
+    /* opacity: 0.5; */
+}
+#logo-animation-area {
+    opacity: 0;
 }
 
 #search-logo {
     position: relative;
-    z-index: 1; /* Sätt ett lägre z-index för att placera den under elden */
+    z-index: 2; /* Sätt ett lägre z-index för att placera den under elden */
 }
 
 
