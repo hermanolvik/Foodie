@@ -1,4 +1,7 @@
+
 document.getElementById('search-button').addEventListener('click', function () {
+    
+    
     // Create the JSON data to send to the backend
     //data will contain the string that was written in the search box on the first page
     const data = document.querySelector('.search-box').value;
@@ -28,12 +31,20 @@ document.getElementById('search-button').addEventListener('click', function () {
             let Ingredients = data.ingredients.replace(/\n/g, '<br>');
             let Instructions = data.instructions.replace(/\n/g, '<br>');
             //Sending the variables up to the app.py for the route of page_1 in flask
+
+            // Hide the loading animation
+            document.getElementById('Layer_1').style.display = 'none';
+
             location.href ="/recipe?title=" + Title + "&ingredients=" + Ingredients + "&instructions=" + Instructions;
+
+           
         
             
             
         })
         .catch(error => console.error('Error:', error));
+        // Hide the loading animation
+        document.getElementById('Layer_1').style.display = 'none';
 });
 
 
@@ -45,3 +56,4 @@ document.getElementById('something-else').addEventListener('click', function() {
     // Open the URL in the current window
     window.location.href = newUrl;
 });
+
