@@ -2,7 +2,7 @@
 document.getElementById('search-button').addEventListener('click', function () {
     /*set opacity to 0*/ 
     
-    document.getElementById('logo-animation-area').style.opacity = 1;
+    document.getElementById('logo-animation-area').style.display = 'block';
     // Create the JSON data to send to the backend
     //data will contain the string that was written in the search box on the first page
     const data = document.querySelector('.search-box').value;

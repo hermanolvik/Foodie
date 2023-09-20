@@ -126,12 +126,14 @@ nav a.active {
     margin: 0 auto; /* Centrera elementet horisontellt */
     height: auto;
     overflow: visible;
-    z-index: 1;
+    z-index: 3;
     top: 80%;
     /* opacity: 0.5; */
 }
 #logo-animation-area {
-    opacity: 0;
+    display: none;
+    opacity: 0.8;
+    
 }
 
 #search-logo {
