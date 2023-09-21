@@ -1,8 +1,10 @@
-
 document.getElementById('search-button').addEventListener('click', function () {
-    /*set opacity to 0*/ 
     
-    document.getElementById('logo-animation-area').style.display = 'block';
+   
+    
+    doAnimations();
+
+    
     // Create the JSON data to send to the backend
     //data will contain the string that was written in the search box on the first page
     const data = document.querySelector('.search-box').value;
@@ -34,15 +36,13 @@ document.getElementById('search-button').addEventListener('click', function () {
             //Sending the variables up to the app.py for the route of page_1 in flask
 
             
-
             location.href ="/recipe?title=" + Title + "&ingredients=" + Ingredients + "&instructions=" + Instructions;
-
-           
-        
-            
+            resetPageAppearance();
             
         })
         .catch(error => console.error('Error:', error));
+        
+        
         
 });
 

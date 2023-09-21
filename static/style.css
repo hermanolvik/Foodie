@@ -114,30 +114,36 @@ nav a.active {
 
 .fire-container {
     position: relative;
-    width: 272px; /* Samma bredd som din bild */
-    margin: 0 auto; /* Centrera elementet horisontellt */
-    overflow: hidden; /* För att förhindra overflow */
+    width: 272px; 
+    margin: 0 auto; 
+    overflow: hidden; 
 }
 
 
 .mo-fire {
     position: relative;
-    width: 300px; /* Samma bredd som din bild */
-    margin: 0 auto; /* Centrera elementet horisontellt */
+    width: 300px; 
+    margin: 0 auto; 
     height: auto;
     overflow: visible;
     z-index: 3;
     top: 80%;
-    /* opacity: 0.5; */
+    
 }
 #logo-animation-area {
     display: none;
     opacity: 0.8;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.fade-in {
+    display: block;
+    opacity: 1;
 }
 
 #search-logo {
     position: relative;
-    z-index: 2; /* Sätt ett lägre z-index för att placera den under elden */
+    z-index: 2; 
 }
 
 
@@ -145,7 +151,7 @@ nav a.active {
     width: 252px;
     height: 125px;
     left: 0px;
-    /* move down to hide the bottom part of the flame */
+    
 }
 
 
@@ -154,7 +160,7 @@ nav a.active {
     position: absolute;
     top: 80%;
     left: 50%;
-    width: 120%; /* Gör SVG fylla hela bredden av föräldraelementet */
+    width: 120%; 
     height: auto;
     height: auto;
     transform: translate(-50%, -20%);
@@ -233,5 +239,44 @@ nav a.active {
         opacity: 0;
     }
 }
+
+.animated-salt {
+    animation: moveUpDown 0.9s infinite alternate;
+    animation-delay: 0.3s;
+    display: none;
+}
+
+.animated-pepper {
+    animation: moveDownUp 0.9s infinite alternate;
+    animation-delay: 0.5s;
+    display: none;
+}
+
+.dimmed {
+    opacity: 0.4;
+}
+
+
+
+
+@keyframes moveUpDown {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-45px);
+    }
+}
+
+@keyframes moveDownUp {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(45px);
+    }
+}
+
+
 
 /*======================= END ========================*/
