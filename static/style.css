@@ -124,6 +124,11 @@ nav a.active {
 .dropdown.active .dropdown-content {
     display: block;
 }
+
+.restrictions-container{
+    display: flex;
+}
+
 /*======================= About Page ========================*/
 .AboutPage{
     padding : 20px;
