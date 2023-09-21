@@ -1,5 +1,6 @@
 import openai
 from flask import Flask, render_template, request, jsonify
+from flask_bootstrap import Bootstrap
 import re
 
 # Initialize the OpenAI API
@@ -8,15 +9,6 @@ openai.api_key = "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"
 # Initialize Flask
 app = Flask(__name__, static_folder='static')
 
-
-# Number of servings
-
-fixed_portions = 5
-portions = list(range(1, fixed_portions + 1))
-# Dietary restrictions
-diet_restrictions = ['Lactose', 'Gluten', 'Vegetarian', 'Vegan',
-                'Pescetarian', 'Kosher', 'Keto', 'Fish Allergy', 'Nut Allergy',
-                'Egg Allergy', 'Soy Allergy', 'Canibalism']
 
 # Kitchen
 kitchens = {
@@ -100,7 +92,7 @@ def generate_recipe_image(title):
 @app.route("/home")
 def main():
     # path = os.path.join(os.path.dirname(__file__), 'Front-End', 'main.html')
-    return render_template('main.html', portions=portions, diet_restrictions=diet_restrictions, kitchens=kitchens)
+    return render_template('main.html', kitchens=kitchens)
 
 
 @app.route('/recipe')
