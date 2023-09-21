@@ -27,7 +27,8 @@ main {
     /* Change display property to block */
     display: block;
     /* Add margin-top to push main content below the header */
-    margin-top: 100px; /* Adjust this value as needed */
+    margin-top: 100px;
+    /* Adjust this value as needed */
 }
 
 nav a {
@@ -74,7 +75,8 @@ nav a.active {
     font-size: 16px;
 }
 
-.search-button, .something-else {
+.search-button,
+.something-else {
     margin-top: 10px;
     padding: 10px 20px;
     border: none;
@@ -92,6 +94,7 @@ nav a.active {
     
     background-color: #bfbfbf;
 }
+
 /*======================= About Page ========================*/
 .Container {
     
@@ -213,6 +216,151 @@ nav a.active {
     margin: 0 auto;
     max-width: 60%;
 }
+/*======================= SVG ANIMATION ========================*/
+
+.fire-container {
+    position: relative;
+    width: 272px; 
+    margin: 0 auto; 
+    overflow: hidden; 
+}
+
+
+.mo-fire {
+    position: relative;
+    width: 300px; 
+    margin: 0 auto; 
+    height: auto;
+    overflow: visible;
+    z-index: 3;
+    top: 80%;
+    
+}
+#logo-animation-area {
+    display: none;
+    opacity: 0.8;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.fade-in {
+    display: block;
+    opacity: 1;
+}
+
+#search-logo {
+    position: relative;
+    z-index: 2; 
+}
+
+
+#svg-view {
+    width: 252px;
+    height: 125px;
+    left: 0px;
+    
+}
+
+
+
+.mo-fire svg {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    width: 120%; 
+    height: auto;
+    height: auto;
+    transform: translate(-50%, -20%);
+    z-index: 4;
+}
+
+.flame {
+    animation-name: flameDisappear;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    opacity: 0.5;
+    transform-origin: 45% 45% 0;
+}
+
+.flame.one {
+    animation-delay: 1s;
+    animation-duration: 3s;
+}
+
+.flame.two {
+    animation-duration: 5s;
+    animation-delay: 1s;
+}
+
+
+.flame-main {
+    animation-name: flameMovement;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+.flame-main.one {
+    animation-duration: 2.2s;
+    animation-delay: 1s;
+}
+
+.flame-main.two {
+    animation-duration: 2s;
+    animation-delay: 1s;
+}
+
+.flame-main.three {
+    animation-duration: 2.1s;
+    animation-delay: 3s;
+}
+
+.flame-main.four {
+    animation-duration: 3.2s;
+    animation-delay: 4s;
+}
+
+.flame-main.five {
+    animation-duration: 2.5s;
+    animation-delay: 5s;
+}
+
+@keyframes flameMovement {
+    50% {
+        transform: scale(0.98, 1.0) translate(0, 2px) rotate(-1deg);
+    }
+}
+
+@keyframes flameDisappear {
+    0% {
+        transform: translate(0) rotate(180deg);
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-10px, -40px) rotate(180deg);
+        opacity: 0;
+    }
+}
+
+.animated-salt {
+    animation: moveUpDown 0.9s infinite alternate;
+    animation-delay: 0.3s;
+    display: none;
+}
+
+.animated-pepper {
+    animation: moveDownUp 0.9s infinite alternate;
+    animation-delay: 0.5s;
+    display: none;
+}
+
+.dimmed {
+    opacity: 0.4;
+}
 
 
 
@@ -268,5 +416,25 @@ nav a.active {
 .TitleBox{
     margin-right: 50px;
 }
+
+@keyframes moveUpDown {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-45px);
+    }
+}
+
+@keyframes moveDownUp {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(45px);
+    }
+}
+
+
 
 /*======================= END ========================*/
