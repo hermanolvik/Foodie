@@ -3,11 +3,23 @@ document.getElementById('search-button').addEventListener('click', function () {
     //data will contain the string that was written in the search box on the first page
     const data = document.querySelector('.search-box').value;
     //data is split into an array of strings, each string is the item separated by comma, it then trims the spaces on start and end
-    const prompt = data.split(',').map(item => item.trim());
+    const ingredients = data.split(',').map(item => item.trim());
 
+    const dietaryRestrictions = collectCheckedValues();
+
+    const selectElement = document.getElementById('Portions-dd');
+
+    // To get the selected option value:
+    const selectedOptionIndex = selectElement.selectedIndex;
+    const selectedOption = selectElement.options[selectedOptionIndex];
+    const numPortions = selectedOption.value;
+    
+    console.log(numPortions);
     //This is the json structure to be sent to backend
     const jsonData = {
-        ingredients: prompt
+        ingredients: ingredients,
+        dietary_restrictions: dietaryRestrictions,
+        number_of_portions: numPortions
     };
 
     // Send a POST request to the backend
@@ -38,6 +50,14 @@ document.getElementById('search-button').addEventListener('click', function () {
 
 
 
+function collectCheckedValues() {
+    const checkedCheckboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]:checked');
+    const values = Array.from(checkedCheckboxes).map(checkbox => checkbox.value);
+    const valuesString = values.join(', ');
+    console.log(valuesString);
+    return valuesString;
+}
+
 document.getElementById('something-else').addEventListener('click', function() {
     // Specify the URL you want to open
     var newUrl = 'https://www.foodora.se'; // Replace with your desired URL
@@ -45,27 +65,23 @@ document.getElementById('something-else').addEventListener('click', function() {
     // Open the URL in the current window
     window.location.href = newUrl;
 });
+
 document.addEventListener("DOMContentLoaded", function () {
-    const dropdown = document.querySelector(".dropdown");
-    const checkboxes = document.querySelectorAll(".dropdown-content input[type='checkbox']");
+    const dropdown = document.querySelector(".dropbtn");
+    
 
     // Toggle the dropdown when the button is clicked
     dropdown.addEventListener("click", function () {
-        this.classList.toggle("active");
+        const drop = document.querySelector(".dropdown");
+        drop.classList.toggle("active");
     });
 
-    // Close the dropdown when the user clicks outside of it
     window.addEventListener("click", function (event) {
-        if (!dropdown.contains(event.target)) {
-            dropdown.classList.remove("active");
+        const dropdownContent = document.querySelector(".dropdown");
+        if (!dropdownContent.contains(event.target)) {
+            dropdownContent.classList.remove("active");
         }
     });
 
-    // Handle checkbox selections
-    checkboxes.forEach(function (checkbox) {
-        checkbox.addEventListener("change", function () {
-            // You can handle checkbox selections here
-            console.log("Selected value: " + this.value + ", Checked: " + this.checked);
-        });
-    });
+
 });
