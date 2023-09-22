@@ -10,10 +10,16 @@
 
         <button type="submit" class="search-button" id="search-button">Search</button>
         <button type="submit" class="something-else" id="something-else">Feeling Lazy</button>
-        <div></div>
+        
+      
+
+    </div>
+
+    <div class="restrictions-container">
+        
+        <div class="portions">
             <label for='Portions-dd'><b>Portions</b></label>
             <select id='Portions-dd' name='Portions'>
-                <option value=''></option>
                 <option value='1'>1</option>
                 <option value='2'>2</option>
                 <option value='3'>3</option>
@@ -24,6 +30,8 @@
                 <option value='8'>8</option>
                 <option value='9'>9</option>
             </select>
+        </div>
+        
         <div class = "dropdown">
             <button class="dropbtn">Dietary Restrictions</button>
             <div class="dropdown-content">
@@ -41,6 +49,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
