@@ -1,6 +1,5 @@
 import openai
 from flask import Flask, render_template, request, jsonify
-from flask_bootstrap import Bootstrap
 import re
 
 # Initialize the OpenAI API
