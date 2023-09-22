@@ -3,31 +3,91 @@
 {% block title %}Page 3{% endblock %}
 
 {% block content %}
-<div class ="AboutPage">
-    <h1>About</h1>
-    <div class="AboutField">
-        <textField>
-            Alignment to the UN Sustainability Goals
-            Reducing food waste aligns with the UN's Sustainable Development Goal 12, emphasizing responsible consumption and production. Food production requires valuable resources like energy and water. When we waste food, the resources needed to produce the food have been used unnecessarily. Additionally, transporting food via fossil fuel-powered vehicles leads to carbon emissions. If we can minimize food waste, it will generate less carbon dioxide emissions.
-            According to the UN agency Food and Agriculture Organization, food waste contributes to nearly ten percent of global greenhouse gas emissions. In some countries, food waste can end up in landfills. The problem with this is that the decomposition process produces methane gas. According to the U.S. Environmental Protection Agency, methane traps heat more efficiently than carbon dioxide. So, food waste is a big international problem.
-            By efficiently using food and avoiding unnecessary waste, we can take a significant step towards combating climate change. Our project aims to help achieve the following subgoals:
-            <br></br>
-            <br></br>
-            12.3 "By 2030, halve per capita global food waste at the retail and consumer levels and reduce food losses along production and supply chains, including post-harvest losses".
-            <br></br>
-            The project will meet this subgoal by helping households more efficiently use ingredients that they already have in their everyday food making.
-            <br></br>
-            The project will also help to reduce waste, thus also align with the following subgoal:
-            <br></br>
-            12.5 "By 2030, substantially reduce waste generation through prevention, reduction, recycling and reuse."
+<div class="Container">
+    <div class="AboutPage">
+        <h1>About</h1>
+        <div class="AboutField">
+            
+            <p class="AboutText">
+                <strong>Alignment to the UN Sustainability Goals</strong>
+            </p>
+            <p class="AboutText">
+                Our mission is to address the global issue of food waste, which closely aligns with the UN's Sustainable Development Goal 12. 
+                This goal emphasizes responsible consumption and production. 
+                Food production consumes precious resources like energy and water. 
+                Unfortunately, when we waste food, these resources are squandered. 
+                Additionally, transporting food via fossil fuel-powered vehicles contributes to harmful carbon emissions. 
+                By reducing food waste, we can significantly curb carbon dioxide emissions.
+            </p>
+            <p class="AboutText">
+                To put it into perspective, 
+                the UN's Food and Agriculture Organization reports that food waste accounts for nearly ten percent of global greenhouse gas emissions. 
+                In some regions, wasted food ends up in landfills, where it decomposes and produces methane gas, 
+                a potent heat-trapping greenhouse gas, according to the U.S. 
+                Environmental Protection Agency. Hence, food waste is a pressing international problem.
+            </p>
+            <p class="AboutText">
+                Our project aims to combat these challenges by empowering households to make efficient use of 
+                ingredients they already have for their everyday meals. In doing so, 
+                we strive to contribute to the following UN subgoals:
+            </p>
+            <ul class="SubGoalsList">
+                <li class="SubGoal">
+                    <strong>12.3:</strong> "By 2030, halve per capita global food waste at the retail and consumer 
+                    levels and reduce food losses along production and supply chains, including post-harvest losses."
+                    <br>
+                    Our project actively promotes responsible food consumption and helps households use their ingredients more efficiently, 
+                    thereby working towards this subgoal.
+                </li>
+                <li class="SubGoal">
+                    <strong>12.5:</strong> "By 2030, substantially reduce waste generation through prevention, reduction, recycling, and reuse."
+                    <br>
+                    We also contribute to this subgoal by placing a strong emphasis on waste reduction and encouraging the efficient use of resources.
+                </li>
+            </ul>
+        </div>
+    </div>
 
+    <div class="DropDowns" >
+        <div class="dropdown" >
+            
+            <h1>What can i do to minimize my food waste?</h1>
+            <img class="arrow-icon" src="{{ url_for('static', filename='arrow.png') }}" alt="Up Arrow" >
+            <div class="dropdown-content">
+                <a>Hmm</a>
+                <p>Try harder</p>
+            </div>
+        </div>
+    
+        <div class="dropdown" >
+            <img class="arrow-icon" src="{{ url_for('static', filename='arrow.png') }}" alt="Up Arrow">
+            <h1>Why can i not search for recipes that includes poisonous ingredients? </h1>
+            <div class="dropdown-content">
+                <a>U serious?</a>
+                <p>Getting a bit worried here</p>
+            </div>
+        </div>
 
+        <div class="dropdown" >
+            <img class="arrow-icon" src="{{ url_for('static', filename='arrow.png') }}" alt="Up Arrow">
+            <h1>Do you track my search history and share it to local authorities?</h1>
+            <div class="dropdown-content">
+                <a>No</a>
+                <p>But starting to think we should</p>
+            </div>
+        </div>
 
-        </textField>
-
-
-
-
+        <div class="dropdown" >
+            <img class="arrow-icon" src="{{ url_for('static', filename='arrow.png') }}" alt="Up Arrow">
+            <h1>Should i be worried?</h1>
+            <div class="dropdown-content">
+                <a>Yes</a>
+                <p>Police is on their way</p>
+            </div>
+        </div>
     </div>
 </div>
+
+<script src="{{ url_for('static', filename='about.js') }}"></script>
+
 {% endblock %}
