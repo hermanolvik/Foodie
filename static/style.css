@@ -95,6 +95,58 @@ nav a.active {
     background-color: #bfbfbf;
 }
 
+.dropdown{
+    position : relative;
+    display:inline-block;
+}
+.dropbtn {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    color: #202124;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    text-align: left;
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Style for the checkbox labels */
+.dropdown-content label {
+    display: block;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Show the dropdown content when the dropdown button is clicked */
+.dropdown.active .dropdown-content {
+    display: block;
+}
+
+.special-input{
+
+
+}
+.portions{
+    margin : 10px;
+}
+.dropdown{
+
+
+}
+
+
 /*======================= About Page ========================*/
 .Container {
     
