@@ -101,6 +101,7 @@ nav a.active {
     display:inline-block;
 }
 .dropbtn {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     margin-top: 10px;
     padding: 10px 20px;
     border: none;
