@@ -1,5 +1,7 @@
 
 document.getElementById('search-button').addEventListener('click', function () {
+
+    doAnimations();
     // Create the JSON data to send to the backend
     //data will contain the string that was written in the search box on the first page
     const data = document.querySelector('.search-box').value;

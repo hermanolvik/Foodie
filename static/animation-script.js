@@ -52,7 +52,7 @@ function resetPageAppearance() {
         animations[i].style.display = 'none';
         animations[i].style.opacity = 0;
     }
-}, 6000); 
+}, 1000); 
 }
 
 function doAnimations() {
