@@ -125,8 +125,16 @@ nav a.active {
     display: block;
 }
 
-.restrictions-container{
-    display: flex;
+.special-input{
+
+
+}
+.portions{
+    margin : 10px;
+}
+.dropdown{
+
+
 }
 
 /*======================= About Page ========================*/
