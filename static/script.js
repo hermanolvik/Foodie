@@ -1,3 +1,4 @@
+
 document.getElementById('search-button').addEventListener('click', function () {
     // Create the JSON data to send to the backend
     //data will contain the string that was written in the search box on the first page
@@ -32,7 +33,7 @@ document.getElementById('search-button').addEventListener('click', function () {
     })
         .then(response => response.json()) //First wait for response, after make response to json
         .then(data => { //After it is made to json, use the data as a variable called "data"
-            
+
             //data is a json object and attributes can be found with dots
             let Title = data.title;
             //<br> is html code for "\n"
@@ -40,12 +41,15 @@ document.getElementById('search-button').addEventListener('click', function () {
             let Ingredients = data.ingredients.replace(/\n/g, '<br>');
             let Instructions = data.instructions.replace(/\n/g, '<br>');
             //Sending the variables up to the app.py for the route of page_1 in flask
-            location.href ="/page_1?title=" + Title + "&ingredients=" + Ingredients + "&instructions=" + Instructions;
-        
-            
-            
+
+
+            location.href = "/recipe?title=" + Title + "&ingredients=" + Ingredients + "&instructions=" + Instructions;
+            resetPageAppearance();
+
         })
         .catch(error => console.error('Error:', error));
+
+
 });
 
 
@@ -59,12 +63,14 @@ function collectCheckedValues() {
 }
 
 document.getElementById('something-else').addEventListener('click', function() {
+
     // Specify the URL you want to open
     var newUrl = 'https://www.foodora.se'; // Replace with your desired URL
 
     // Open the URL in the current window
     window.location.href = newUrl;
 });
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const dropdown = document.querySelector(".dropbtn");
@@ -85,3 +91,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 });
+
