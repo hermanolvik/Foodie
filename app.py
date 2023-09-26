@@ -8,6 +8,14 @@ openai.api_key = "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"
 # Initialize Flask
 app = Flask(__name__, static_folder='static')
 
+# Initialize kitchens
+kitchens = [
+    'All',
+    'Sweden',
+    'Greece',
+    'England',
+    'India'
+]
 
 def parse_recipe(generated_text):
     # Initialize empty dictionary to store recipe components
@@ -80,7 +88,7 @@ def generate_recipe_image(title):
 @app.route("/home")
 def main():
     # path = os.path.join(os.path.dirname(__file__), 'Front-End', 'main.html')
-    return render_template('main.html')
+    return render_template('main.html', kitchens = kitchens)
 
 
 @app.route('/recipe')
