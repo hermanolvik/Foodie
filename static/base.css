@@ -1,0 +1,55 @@
+/*===================== CHANGES FOR ALL PAGES START ======================*/
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eeeeee;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header a {
+    text-decoration: none;
+    color: #464C4F;
+}
+
+main {
+    /* Change display property to block */
+    display: block;
+    /* Add margin-top to push main content below the header */
+    margin-top: 100px;
+    /* Adjust this value as needed */
+}
+
+nav a {
+    display: inline-block;
+    padding: 8px 12px;
+    border: 1px solid transparent;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background-color: rgba(40, 40, 40, 0.066);
+    border-color: #EEE;
+    text-decoration: none;
+}
+
+nav a.active {
+    background-color: rgb(70, 176, 59);
+    color: white;
+    border-color: rgb(70, 176, 59);
+}
+
+/*===================== END ======================*/
