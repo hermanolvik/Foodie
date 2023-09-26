@@ -1,0 +1,72 @@
+/*======================= Recipie Page ========================*/
+.RecipiePage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.ContentWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap; 
+    gap: 5%;
+    margin: 0 auto;
+    max-width: 60%;
+}
+
+
+
+.IngredientsContainer {
+    flex: 1;
+    
+}
+
+.Ingredients {
+    width: 100%;    
+}
+
+.Ingredients h1 {
+    width: 100%;
+     
+    margin-right: 15%;
+}
+
+.SquareBox{
+    background-color: #ffffff;
+    width: 100%;
+    padding: 10px;
+    box-shadow: 0 8px 16px rgba(138, 138, 138, 0.2);
+    line-height: 0.8rem;
+    margin-bottom: 2px;
+   
+    margin-right: 10%;
+}
+
+.RoundedBox {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(66, 66, 66, 0.2);
+    
+}
+
+.RoundedBox.instructions {
+    flex-basis: 48%; /* Adjust the width as needed */
+    line-height: 1.3rem;
+    margin-top: 6%;
+    
+    
+}
+.RoundedBox.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap; /* Allow items to wrap to the next row if needed */
+    margin-bottom: 50px;
+}
+
+.TitleBox{
+    margin-right: 50px;
+}
