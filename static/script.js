@@ -9,20 +9,23 @@ document.getElementById('search-button').addEventListener('click', function () {
     const ingredients = data.split(',').map(item => item.trim());
 
     const dietaryRestrictions = collectCheckedValues();
-
     const selectElement = document.getElementById('Portions-dd');
+    const units = document.getElementById('Units-dd');
 
     // To get the selected option value:
     const selectedOptionIndex = selectElement.selectedIndex;
     const selectedOption = selectElement.options[selectedOptionIndex];
     const numPortions = selectedOption.value;
+    const selectedUnit = units.options[selectedOptionIndex];
+    const unit = selectedUnit.value;
     
     console.log(numPortions);
     //This is the json structure to be sent to backend
     const jsonData = {
         ingredients: ingredients,
         dietary_restrictions: dietaryRestrictions,
-        number_of_portions: numPortions
+        number_of_portions: numPortions,
+        measurement_unit: unit
     };
 
     // Send a POST request to the backend
