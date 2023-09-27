@@ -1,7 +1,10 @@
 
+window.onload = function() {
+    resetPageAppearance();
+};
 document.getElementById('search-button').addEventListener('click', function () {
-
     doAnimations();
+
     // Create the JSON data to send to the backend
     //data will contain the string that was written in the search box on the first page
     const data = document.querySelector('.search-box').value;
@@ -54,7 +57,11 @@ document.getElementById('search-button').addEventListener('click', function () {
 
 
             location.href = "/recipe?title=" + Title + "&ingredients=" + Ingredients + "&instructions=" + Instructions;
-            resetPageAppearance();
+            // timer
+            setTimeout(function () {
+                resetPageAppearance();
+            }, 6000);
+            
 
         })
         .catch(error => console.error('Error:', error));

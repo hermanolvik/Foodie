@@ -34,7 +34,7 @@ function dimAllButLoadingAnimation() {
 
 // Funktion  sidans utseende
 function resetPageAppearance() {
-    setTimeout(function() {
+    
     let header = document.getElementsByTagName('header')[0];
     header.classList.remove('dimmed');
 
@@ -52,7 +52,7 @@ function resetPageAppearance() {
         animations[i].style.display = 'none';
         animations[i].style.opacity = 0;
     }
-}, 1000); 
+
 }
 
 function doAnimations() {
