@@ -1,12 +1,33 @@
 
+
 document.getElementById('search-button').addEventListener('click', function () {
 
     doAnimations();
     // Create the JSON data to send to the backend
     //data will contain the string that was written in the search box on the first page
-    const data = document.querySelector('.search-box').value;
+    const data = document.getElementById('tag-container');
+    
+    
+    const tagContainer = document.getElementById('tag-container');
+
+    const tagElements = data.querySelectorAll(".tag");
+    
+    // Create an empty array to store the values
+    const tagValuesArray = [];
+
+    // Loop through the selected elements and extract their values
+    tagElements.forEach(tag => {
+        tagValuesArray.push(tag.textContent);
+    });
+
+
+    const ingredients = tagValuesArray;
+
+   
+    console.log(ingredients);
     //data is split into an array of strings, each string is the item separated by comma, it then trims the spaces on start and end
-    const ingredients = data.split(',').map(item => item.trim());
+
+   // const ingredients = data.split(',').map(item => item.trim());
 
     const dietaryRestrictions = collectCheckedValues();
 
@@ -54,6 +75,42 @@ document.getElementById('search-button').addEventListener('click', function () {
 
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+
+    const addButton = document.getElementById('add-tag');
+    const inputBox = document.getElementById('ingredient-field');
+    const tagContainer = document.getElementById('tag-container');
+    
+
+    addButton.addEventListener('click', function(e) {
+
+        const tagValue = inputBox.value;
+        console.log(tagValue);
+        
+        const newTag = document.createElement('span');
+        newTag.classList.add('tag'); 
+        newTag.textContent = tagValue; // add text to element
+        newTag.addEventListener('click',removeTag);
+        tagContainer.appendChild(newTag); 
+
+        inputBox.value = '';
+    })
+
+    // Add event listener to all elements with class 'tag'
+    const tags = document.querySelectorAll('.tag');
+    tags.forEach(tag => {
+        tag.addEventListener('click', function(e) {
+            console.log('Clicked on tag:', tag.textContent);
+            // Add your code here to handle the click event
+        });
+    });
+
+});
+function removeTag(event){
+    const clickedTag = event.target;
+    clickedTag.remove();
+   
+}
 
 
 function collectCheckedValues() {
@@ -93,4 +150,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 });
+
+
 
