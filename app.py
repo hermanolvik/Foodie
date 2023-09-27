@@ -51,7 +51,6 @@ def generate_recipe(json_object):
         prompt += f" The recipe should be suitable for someone with the following dietary restrictions: {dietary_restrictions}."
     prompt += f" The recipe should serve {num_portions} portions."
     prompt += f" The recipe should use explicitly {measurement_unit} measurement units and no other type of units."
-    # prompt += f" Also please keep in mind what measurement units I asked for and do not use any other units!"
     prompt += " Recipe:"
 
     # Make API request
