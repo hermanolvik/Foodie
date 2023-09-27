@@ -16,7 +16,9 @@ document.getElementById('search-button').addEventListener('click', function () {
     const selectedOptionIndex = selectElement.selectedIndex;
     const selectedOption = selectElement.options[selectedOptionIndex];
     const numPortions = selectedOption.value;
-    const selectedUnit = units.options[selectedOptionIndex];
+
+    const selectedUnitIndex = units.selectedIndex;
+    const selectedUnit = units.options[selectedUnitIndex];
     const unit = selectedUnit.value;
     
     console.log(numPortions);
