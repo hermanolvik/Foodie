@@ -9,26 +9,28 @@ const contentA = document.getElementById('aboutId');
 
 toggleSwitch.addEventListener('change', () => {
     if (toggleSwitch.checked) {
-        contentB.classList.add('dark-mode-body');
-        contentH.classList.add('dark-mode-head');
-        contentI.classList.add('Ingredients-dark');
-        contentP.classList.add('dark-portions');
-        contentA.classList.add('about-dark');
-        contentH.classList.remove('light-mode');
-        contentB.classList.remove('light-mode');
-        contentI.classList.remove('Ingredients-light');
-        contentP.classList.remove('portions');
-        contentA.classList.remove("about-light");
+        if (contentB) contentB.classList.add('dark-mode-body');
+        if (contentH) contentH.classList.add('dark-mode-head');
+        if (contentP) contentP.classList.add('dark-portions');
+        if (contentI) contentI.classList.add('Ingredients-dark');
+        if (contentA) contentA.classList.add('about-dark');
+
+        if (contentH) contentH.classList.remove('light-mode');
+        if (contentB) contentB.classList.remove('light-mode');
+        if (contentI) contentI.classList.remove('Ingredients-light');
+        if (contentP) contentP.classList.remove('portions');
+        if (contentA) contentA.classList.remove('about-light');
     } else {
-        contentB.classList.remove('dark-mode-body');
-        contentH.classList.remove('dark-mode-head');
-        contentI.classList.remove('Ingredients-dark');
-        contentP.classList.remove('dark-portions');
-        contentA.classList.remove('about-dark');
-        contentB.classList.add('light-mode');
-        contentH.classList.add('light-mode');
-        contentI.classList.add('Ingredients-light');
-        contentP.classList.add('portions');
-        contentA.classList.add('about-light');
+        if (contentB) contentB.classList.remove('dark-mode-body');
+        if (contentH) contentH.classList.remove('dark-mode-head');
+        if (contentP) contentP.classList.remove('dark-portions');
+        if (contentI) contentI.classList.remove('Ingredients-dark');
+        if (contentA) contentA.classList.remove('about-dark');
+
+        if (contentB) contentB.classList.add('light-mode');
+        if (contentH) contentH.classList.add('light-mode');
+        if (contentI) contentI.classList.add('Ingredients-light');
+        if (contentP) contentP.classList.add('portions');
+        if (contentA) contentA.classList.add('about-light');
     }
 });
