@@ -25,11 +25,11 @@
 
     <div class="ContentWrapper">
         <div class="IngredientsContainer">
-            <div class="Ingredients">
+            <div id="IngredientsId" class="Ingredients">
                 {% for ingredient in ingredients.split('<br>') %}
                     {% if ingredient.strip() %}
                         {% if loop.index == 1 %}
-                            <h1>{{ ingredient | safe }}</h1>
+                            <h1 id="IngredientsHead">{{ ingredient | safe }}</h1>
                         {% else %}
                             <div class="SquareBox">
                                 <p>{{ ingredient | safe }}</p>
