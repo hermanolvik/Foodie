@@ -2,6 +2,7 @@
 
 {% block additional_css %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 {% endblock %}
 
 {% block title %}Page 1{% endblock %}
@@ -12,18 +13,28 @@
         {% include 'loading-animations.html' %}
 
         <img id="search-logo" src="{{ url_for('static', filename='logo.png') }}" alt="Search Logo" height="92"
-             width="272">
+            width="272">
     </div>
     <div class="search-container">
+        <div class="search-box">
+            <input type="text" id="ingredient-field" name="q" placeholder="Input ingredients here">
+            <div class="tag-container" id="tag-container">
 
-        <input type="text" name="q" class="search-box" placeholder="Input ingredients here">
+
+            </div>
+        </div>
+
+        <button type="submit" class="something-else" id="add-tag">Add</button>
         <button type="submit" class="search-button" id="search-button">Search</button>
         <button type="submit" class="something-else" id="something-else">Feeling Lazy</button>
 
 
-    </div>
 
+
+
+    </div>
     <div class="special-input">
+
 
         <div class="portions">
             <label for='Portions-dd'><b>Portions</b></label>
@@ -83,6 +94,27 @@
         </div>
     </div>
 
+
+            <div class="dropdown">
+                <button class="dropbtn">Dietary Restrictions</button>
+                <div class="dropdown-content">
+                    <label><input type="checkbox" value="lactose">Lactose</input></label>
+                    <label><input type="checkbox" value="gluten">Gluten</input></label>
+                    <label><input type="checkbox" value="vegetarian">Vegetarian</input></label>
+                    <label><input type="checkbox" value="vegan">Vegan</input></label>
+                    <label><input type="checkbox" value="pescetarian">Pescetarian</input></label>
+                    <label><input type="checkbox" value="kosher">Kosher</input></label>
+                    <label><input type="checkbox" value="keto">Keto</input></label>
+                    <label><input type="checkbox" value="fishAllergy">Fish Allergy</input></label>
+                    <label><input type="checkbox" value="nutAllergy">Nut Allergy</input></label>
+                    <label><input type="checkbox" value="eggAllergy">Egg Allergy</input></label>
+                    <label><input type="checkbox" value="soyAllergy">Soy Allergy</input></label>
+                </div>
+            </div>
+        </div>
+
+
+</div>
 </div>
 
 <script src="{{ url_for('static', filename='animation-script.js') }}"></script>
