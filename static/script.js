@@ -55,7 +55,7 @@ document.getElementById('search-button').addEventListener('click', function () {
         ingredients: ingredients,
         dietary_restrictions: dietaryRestrictions,
         number_of_portions: numPortions,
-        measurement_unit: unit
+        measurement_unit: unit,
         intKitchens: intKitchens
     };
 
