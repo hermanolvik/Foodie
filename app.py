@@ -51,12 +51,14 @@ def generate_recipe(json_object):
     ingredients = ", ".join(json_object['ingredients'])
     dietary_restrictions = json_object.get('dietary_restrictions', 'None')
     num_portions = json_object.get('number_of_portions', 4)
+    measurement_unit = json_object.get('measurement_unit', 'metric (do not use cups, only metric units)')
     int_kitchens = json_object.get('intKitchens', 'All')
 
     # Create the prompt for the API
     prompt = f"Please write a recipe that includes the following ingredients: {ingredients}."
     if dietary_restrictions != 'None':
         prompt += f" The recipe should be suitable for someone with the following dietary restrictions: {dietary_restrictions}."
+    prompt += f" The recipe should use explicitly {measurement_unit} measurement units and no other type of units."
     prompt += f" The recipe should serve {num_portions} portions. "
     if int_kitchens != 'All':
         prompt += f" Restrict to recepies from {int_kitchens}."

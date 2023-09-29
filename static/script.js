@@ -9,8 +9,9 @@ document.getElementById('search-button').addEventListener('click', function () {
     const ingredients = data.split(',').map(item => item.trim());
 
     const dietaryRestrictions = collectCheckedValues();
-
     const selectElement = document.getElementById('Portions-dd');
+    const units = document.getElementById('Units-dd');
+
     const selectElement2 = document.getElementById('kitchens');
 
     // To get the selected option value:
@@ -18,6 +19,9 @@ document.getElementById('search-button').addEventListener('click', function () {
     const selectedOption = selectElement.options[selectedOptionIndex];
     const numPortions = selectedOption.value;
 
+    const selectedUnitIndex = units.selectedIndex;
+    const selectedUnit = units.options[selectedUnitIndex];
+    const unit = selectedUnit.value;
     // To get the selected option value:
     const selectedOptionIndex2 = selectElement2.selectedIndex;
     const selectedOption2 = selectElement2.options[selectedOptionIndex2];
@@ -30,6 +34,7 @@ document.getElementById('search-button').addEventListener('click', function () {
         ingredients: ingredients,
         dietary_restrictions: dietaryRestrictions,
         number_of_portions: numPortions,
+        measurement_unit: unit
         intKitchens: intKitchens
     };
 

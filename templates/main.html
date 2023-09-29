@@ -17,7 +17,6 @@
     <div class="search-container">
 
         <input type="text" name="q" class="search-box" placeholder="Input ingredients here">
-
         <button type="submit" class="search-button" id="search-button">Search</button>
         <button type="submit" class="something-else" id="something-else">Feeling Lazy</button>
 
@@ -72,6 +71,15 @@
                 <label><input type="checkbox" value="eggAllergy">Egg Allergy</input></label>
                 <label><input type="checkbox" value="soyAllergy">Soy Allergy</input></label>
             </div>
+        </div>
+
+        <div class=units>
+            <label for='Units-dd'><b>Measurement unit</b></label>
+            <select id='Units-dd' name='Units'>
+                <option value='metric (do not use cups, only metric units)'>Metric</option>
+                <option value='US cups'>US cups</option>
+                <option value='imperial'>Imperial</option>
+            </select>
         </div>
     </div>
 
