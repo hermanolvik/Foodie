@@ -8,6 +8,14 @@ openai.api_key = "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"
 # Initialize Flask
 app = Flask(__name__, static_folder='static')
 
+# Initialize kitchens
+kitchens = [
+    'All',
+    'Sweden',
+    'Greece',
+    'England',
+    'India'
+]
 
 def parse_recipe(generated_text):
     # Initialize empty dictionary to store recipe components
@@ -44,13 +52,16 @@ def generate_recipe(json_object):
     dietary_restrictions = json_object.get('dietary_restrictions', 'None')
     num_portions = json_object.get('number_of_portions', 4)
     measurement_unit = json_object.get('measurement_unit', 'metric (do not use cups, only metric units)')
+    int_kitchens = json_object.get('intKitchens', 'All')
 
     # Create the prompt for the API
     prompt = f"Please write a recipe that includes the following ingredients: {ingredients}."
     if dietary_restrictions != 'None':
         prompt += f" The recipe should be suitable for someone with the following dietary restrictions: {dietary_restrictions}."
-    prompt += f" The recipe should serve {num_portions} portions."
     prompt += f" The recipe should use explicitly {measurement_unit} measurement units and no other type of units."
+    prompt += f" The recipe should serve {num_portions} portions. "
+    if int_kitchens != 'All':
+        prompt += f" Restrict to recepies from {int_kitchens}."
     prompt += " Recipe:"
 
     # Make API request
@@ -82,7 +93,7 @@ def generate_recipe_image(title):
 @app.route("/home")
 def main():
     # path = os.path.join(os.path.dirname(__file__), 'Front-End', 'main.html')
-    return render_template('main.html')
+    return render_template('main.html', kitchens = kitchens)
 
 
 @app.route('/recipe')
