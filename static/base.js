@@ -8,9 +8,19 @@ const elements = [ // array av ojects
     { id: 'aboutId', darkClass: 'about-dark', lightClass: 'about-light' },
 ];
 
+// Function to save dark mode state to local storage
+function saveDarkModeState(isDarkMode) {
+    localStorage.setItem('darkMode', isDarkMode);
+}
+
 toggleSwitch.addEventListener('change', () => {
+
+    const isDarkMode = toggleSwitch.checked;
+    saveDarkModeState(isDarkMode);
+
     elements.forEach(element => { // loopa igenom varje element i arrayn
         const el = document.getElementById(element.id); 
+
         if (!el) { // om elementet ej exitsterar på sidan, gå till nästa element
             return;
         }
@@ -23,3 +33,10 @@ toggleSwitch.addEventListener('change', () => {
         }
     });
 });
+
+// Check local storage for dark mode state on page load
+const savedDarkModeState = localStorage.getItem('darkMode');
+if (savedDarkModeState === 'true') {
+    toggleSwitch.checked = true;
+    toggleSwitch.dispatchEvent(new Event('change')); // Trigger change event to apply dark mode
+}
