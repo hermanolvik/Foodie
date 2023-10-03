@@ -288,6 +288,7 @@
 /*======================= TAGS ========================*/
 .tag-container {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 5px;
     overflow-x: auto;

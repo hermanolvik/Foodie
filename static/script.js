@@ -6,8 +6,6 @@ document.getElementById('search-button').addEventListener('click', function () {
     //data will contain the string that was written in the search box on the first page
     const data = document.getElementById('tag-container');
     
-    
-    const tagContainer = document.getElementById('tag-container');
 
     const tagElements = data.querySelectorAll(".tag");
     
@@ -101,27 +99,31 @@ document.addEventListener("DOMContentLoaded", function () {
     addButton.addEventListener('click', function(e) {
 
         const tagValue = inputBox.value;
-        console.log(tagValue);
+        if (tagValue.trim() === '') { // om input är dom, returna
+            return; 
+        }
+        
+        // Check if tag already exists
+        const existingTags = tagContainer.querySelectorAll('.tag');
+        for (let i = 0; i < existingTags.length; i++) { // gör inget om tag redan finns
+            if (existingTags[i].textContent === tagValue) {
+                return; 
+            }
+        }
         
         const newTag = document.createElement('span');
         newTag.classList.add('tag'); 
-        newTag.textContent = tagValue; // add text to element
-        newTag.addEventListener('click',removeTag);
+        newTag.textContent = tagValue; 
+        newTag.addEventListener('click',removeTag); 
         tagContainer.appendChild(newTag); 
 
         inputBox.value = '';
     })
 
-    // Add event listener to all elements with class 'tag'
-    const tags = document.querySelectorAll('.tag');
-    tags.forEach(tag => {
-        tag.addEventListener('click', function(e) {
-            console.log('Clicked on tag:', tag.textContent);
-            // Add your code here to handle the click event
-        });
-    });
+    
 
 });
+
 function removeTag(event){
     const clickedTag = event.target;
     clickedTag.remove();
