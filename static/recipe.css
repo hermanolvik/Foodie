@@ -16,8 +16,6 @@
     max-width: 60%;
 }
 
-
-
 .IngredientsContainer {
     flex: 1;
     
@@ -63,4 +61,15 @@
 
 .TitleBox{
     margin-right: 50px;
+}
+
+.share{
+    margin-top: 50px;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    color: #202124;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.1s ease-in-out;
 }

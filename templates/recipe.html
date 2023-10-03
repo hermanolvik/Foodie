@@ -19,7 +19,7 @@
             </p>     
         </div>
         <div class="ImageBox">
-            <img class="StockPic" id="recipe-image" src="{{recipe_image_url}}">
+            <img class="StockPic" id="recipe-image" src="static/recipe_image.png">
         </div>
     </div>
 
@@ -44,6 +44,10 @@
             <p>{{ instructions | safe }}</p>
         </div>
     </div>
+
+<!--    <div>-->
+<!--        <button type="submit" class="share" id="share-button">Share recipe</button>-->
+<!--    </div>-->
 </div>
 
 <script src="{{ url_for('static', filename='recipe.js') }}"></script>
