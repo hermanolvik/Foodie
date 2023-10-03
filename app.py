@@ -134,114 +134,108 @@ def process_prompt():
     generate_recipe_image(recipe.get('title'))
     return jsonify(recipe)
 
-# @app.route('/create-image', methods=['GET'])
-# def create_image():
-#     # URL of the webpage you want to scrape
-#     url = request.args.get('url')
-#     print(url)
-#     url = unquote(url)
-#     print(url)
-#     # # Send an HTTP GET request to the URL
-#     response = requests.get(url)
-#
-#     # Check if the request was successful (status code 200)
-#     if response.status_code == 200:
-#         # Parse the HTML content with BeautifulSoup
-#         soup = BeautifulSoup(response.text, 'html.parser')
-#
-#         # Extract text from specific elements (e.g., <h1> and <p>)
-#         title_text = soup.find('h1').get_text()
-#         ingredients_text = soup.find(id='IngredientsId')
-#         instructions_text = soup.find(class_='instructions')
-#
-#         ingredients = ingredients_text.get_text() if ingredients_text else "Ingredients not found"
-#         instructions = instructions_text.get_text() if ingredients_text else "Instructions not found"
-#
-#         img_tag = soup.find('img', id='recipe-image')
-#         img_logo = soup.find('img', id='logo-image')
-#
-#         if img_tag:
-#             img_url = img_tag.get('src')
-#             img_url = urljoin(url, img_url)
-#             # print(img_url)
-#
-#             img_logo_url = img_logo.get('src')
-#             img_logo_url = urljoin(url, img_logo_url)
-#             # print(img_logo_url)
-#
-#             # Send an HTTP GET request for the image
-#             img_response = requests.get(img_url)
-#             img_logo_response = requests.get(img_logo_url)
-#
-#             # Check if the image download was successful
-#             if img_response.status_code == 200:
-#
-#                 bordered_image = Image.new('RGB', (700, 700), color='white')
-#
-#                 # Create an image with the extracted text
-#                 image = Image.new('RGB', (600, 600), (255, 196, 107))
-#                 draw = ImageDraw.Draw(image)
-#                 # font = ImageFont.load_default()
-#
-#                 # Set the text color and size
-#                 text_color = 'black'
-#
-#                 title_font = ImageFont.truetype('arial.ttf', 35)
-#                 ingredients_font = ImageFont.truetype('arial.ttf', 20)
-#                 instructions_font = ImageFont.truetype('arial.ttf', 20)
-#
-#                 title_pos = (20, 100)
-#                 ingredients_pos = (20, 150)
-#                 instructions_pos = (200, 200)
-#
-#                 draw.text(title_pos, title_text, fill=text_color, font=title_font)
-#                 draw.text(ingredients_pos, ingredients, fill=text_color, font=ingredients_font)
-#                 # draw.text(instructions_pos, instructions, fill=text_color, font=instructions_font)
-#
-#                 # Open and paste the downloaded image onto the generated image
-#                 img = Image.open(BytesIO(img_response.content))
-#                 # image.paste(img, (300, 150))  # Adjust the position as needed
-#
-#                 # Create a mask for rounding the corners of the logo
-#                 mask = Image.new('L', img.size, 0)
-#                 draw = ImageDraw.Draw(mask)
-#                 roundness = -40
-#                 draw.ellipse(
-#                     (roundness,
-#                      roundness,
-#                      img.width - roundness,
-#                      img.height - roundness
-#                      ),
-#                     fill=255
-#                 )
-#
-#                 # Apply the mask to round the corners of the logo
-#                 rounded_img = ImageOps.fit(img, mask.size, centering=(0.5, 0.5))
-#                 rounded_img.putalpha(mask)
-#
-#                 # Paste the rounded logo onto the image with transparency
-#                 image.paste(rounded_img, (300, 150), rounded_img)
-#
-#                 img_logo = Image.open(BytesIO(img_logo_response.content))
-#                 img_logo = img_logo.convert('RGBA')
-#                 resized_logo = img_logo.resize((209, 64))
-#                 image.paste(resized_logo, (180, 20), resized_logo)
-#
-#                 bordered_image.paste(image, (50, 50))
-#
-#                 print('hello')
-#
-#                 # Save the image
-#                 bordered_image.save('webpage_text.png')
-#
-#                 return 'succs'
-#
-#             else:
-#                 print(f"Failed to download image from {img_url}")
-#         else:
-#             print("Image not found on the webpage.")
-#     else:
-#         print("Failed to retrieve the webpage. Status code:", response.status_code)
+@app.route('/create-image', methods=['GET'])
+def create_image():
+    # URL of the webpage you want to scrape
+    url = request.args.get('url')
+    print(url)
+    # # Send an HTTP GET request to the URL
+    response = requests.get(url)
+
+    # Check if the request was successful (status code 200)
+    if response.status_code == 200:
+        # Parse the HTML content with BeautifulSoup
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        # Extract text from specific elements (e.g., <h1> and <p>)
+        title_text = soup.find('h1').get_text()
+        ingredients_text = soup.find(id='IngredientsId')
+        instructions_text = soup.find(class_='instructions')
+
+        ingredients = ingredients_text.get_text() if ingredients_text else "Ingredients not found"
+        instructions = instructions_text.get_text() if ingredients_text else "Instructions not found"
+
+        img_tag = soup.find('img', id='recipe-image')
+        img_logo = soup.find('img', id='logo-image')
+
+        if img_tag:
+            img_url = img_tag.get('src')
+            img_url = urljoin(url, img_url)
+
+            img_logo_url = img_logo.get('src')
+            img_logo_url = urljoin(url, img_logo_url)
+
+            # Send an HTTP GET request for the image
+            img_response = requests.get(img_url)
+            img_logo_response = requests.get(img_logo_url)
+
+            # Check if the image download was successful
+            if img_response.status_code == 200:
+
+                bordered_image = Image.new('RGB', (700, 1050), color='white')
+
+                # Create an image with the extracted text
+                image = Image.new('RGB', (600, 950), (255, 196, 107))
+                draw = ImageDraw.Draw(image)
+                # font = ImageFont.load_default()
+
+                # Set the text color and size
+                text_color = 'black'
+
+                title_font = ImageFont.truetype('arial.ttf', 35)
+                ingredients_font = ImageFont.truetype('arial.ttf', 20)
+                instructions_font = ImageFont.truetype('arial.ttf', 20)
+
+                title_pos = (20, 100)
+                ingredients_pos = (20, 150)
+                instructions_pos = (200, 200)
+
+                draw.text(title_pos, title_text, fill=text_color, font=title_font)
+                draw.text(ingredients_pos, ingredients, fill=text_color, font=ingredients_font)
+                # draw.text(instructions_pos, instructions, fill=text_color, font=instructions_font)
+
+                # Open and paste the downloaded image onto the generated image
+                img = Image.open(BytesIO(img_response.content))
+                # image.paste(img, (300, 150))  # Adjust the position as needed
+
+                # Create a mask for rounding the corners of the logo
+                mask = Image.new('L', img.size, 0)
+                draw = ImageDraw.Draw(mask)
+                roundness = -40
+                draw.ellipse(
+                    (roundness,
+                     roundness,
+                     img.width - roundness,
+                     img.height - roundness
+                     ),
+                    fill=255
+                )
+
+                # Apply the mask to round the corners of the logo
+                rounded_img = ImageOps.fit(img, mask.size, centering=(0.5, 0.5))
+                rounded_img.putalpha(mask)
+
+                # Paste the rounded logo onto the image with transparency
+                image.paste(rounded_img, (300, 150), rounded_img)
+
+                img_logo = Image.open(BytesIO(img_logo_response.content))
+                img_logo = img_logo.convert('RGBA')
+                resized_logo = img_logo.resize((209, 64))
+                image.paste(resized_logo, (180, 20), resized_logo)
+
+                bordered_image.paste(image, (50, 50))
+
+                # Save the image
+                bordered_image.save('share_image.png')
+
+                return 'success'
+
+            else:
+                print(f"Failed to download image from {img_url}")
+        else:
+            print("Image not found on the webpage.")
+    else:
+        print("Failed to retrieve the webpage. Status code:", response.status_code)
 
 
 if __name__ == '__main__':
