@@ -144,7 +144,9 @@ document.getElementById('something-else').addEventListener('click', function() {
 
     // Open the URL in the current window
     window.location.href = newUrl;
+    
 });
+
 
 
 document.addEventListener("DOMContentLoaded", function () {

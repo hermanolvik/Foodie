@@ -8,17 +8,23 @@
     {% block additional_css %}{% endblock %}
     
 </head>
-<body>
-    <header>
+<body id="Bbody" class="light-mode">
+    <header id="Hheader" class="light-mode">
         <a href="{{ url_for('main') }}" id="logo"><img src="{{ url_for('static', filename='header-logo.png') }}" alt="Header Image" height="50"></a>
         <nav>
             <a href="{{ url_for('page_2') }}">page 2</a>
             <a href="{{ url_for('page_3') }}">About us</a>
         </nav>
+        <label class="switch">
+            <input type="checkbox" id="toggleSwitch">
+            <span class="slider"></span>
+        </label>
     </header>
+
     <main>
         {% block content %}{% endblock %}
     </main>
-    
+    <script src="{{ url_for('static', filename='base.js') }}"></script>
+
 </body>
 </html>

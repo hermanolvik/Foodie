@@ -5,6 +5,8 @@ body {
     background-color: #eeeeee;
 }
 
+
+
 header {
     position: fixed;
     top: 0;
@@ -51,5 +53,117 @@ nav a.active {
     color: white;
     border-color: rgb(70, 176, 59);
 }
+
+/* =========================DarkMode================= */
+
+.light-mode {
+    background-color: #eeeeee;
+    /*color: black;*/
+}
+
+.dark-mode-body {
+    background-color: rgb(20, 20, 20);
+}
+
+.dark-mode-head {
+    background-color: black;
+    /*color: white;*/
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.Ingredients-dark{
+    width: 100%;
+    margin-right: 15%;
+    color: white;
+}
+
+.Ingredients-light{
+    width: 100%;
+    margin-right: 15%;
+    color: black;
+}
+
+.dark-portions{
+    margin: 10px;
+    color: white; 
+}
+
+.portions{
+    margin: 10px;
+    color: black;
+}
+
+.about-dark{
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: 900;
+    font-size: 2.5rem;
+    letter-spacing: .0125rem;
+    line-height: 1.7rem;
+    color: white;
+}
+
+.about-light{
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: 900;
+    font-size: 2.5rem;
+    letter-spacing: .0125rem;
+    line-height: 1.7rem;
+    color: black;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide the default checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Style the slider (the switch itself) */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+/* Style the slider when it's in the "on" (dark mode) position */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+/* Change the background color of the slider when it's in the "off" (light mode) position */
+#toggleSwitch:checked + .slider {
+    background-color: darkgray;
+}
+
+/* Move the slider to the right (dark mode) when checked */
+#toggleSwitch:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
 
 /*===================== END ======================*/
