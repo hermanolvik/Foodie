@@ -18,10 +18,7 @@
     <div class="search-container">
         <div class="search-box">
             <input type="text" id="ingredient-field" name="q" placeholder="Input ingredients here">
-            <div class="tag-container" id="tag-container">
-
-
-            </div>
+            
         </div>
 
         <button type="submit" class="something-else" id="add-tag">Add</button>
@@ -33,11 +30,12 @@
 
 
     </div>
+    
     <div class="special-input">
 
 
         <div class="portions">
-            <label for='Portions-dd'><b id="portions-id" >Portions</b></label>
+            <label for='Portions-dd'><b id="portions-id">Portions</b></label>
             <select id='Portions-dd' name='Portions'>
                 <option value='1'>1</option>
                 <option value='2'>2</option>
@@ -50,25 +48,21 @@
                 <option value='9'>9</option>
             </select>
         </div>
-        <br>
+        
         <div class="kitchen-input">
-            <h2>Select a Kitchen:</h2>
-
-            <form>
-                <label for="kitchens">Select a kitchen:</label>
-                <select id="kitchens" name="kitchens">
-                    {% for kitchen in kitchens %}
-                    <option value="{{ kitchen }}">{{ kitchen }}</option>
-                    {% endfor %}
-                </select>
-            </form>
-
-
+            <label for="kitchens"><b id="portions-id">Kitchen:</b></label>
+            <select id="kitchens" name="kitchens">
+                {% for kitchen in kitchens %}
+                <option value="{{ kitchen }}">{{ kitchen }}</option>
+                {% endfor %}
+            </select>
         </div>
 
 
         <div class="dropdown">
-            <button class="dropbtn">Dietary Restrictions</button>
+            <label><b>Dietary Restrictions</b></label>
+            <button class="dropbtn" (click)="showDropDown=!showDropDown">
+                Select
             <div class="dropdown-content">
                 <label><input type="checkbox" value="lactose">Lactose</input></label>
                 <label><input type="checkbox" value="gluten">Gluten</input></label>
@@ -82,10 +76,12 @@
                 <label><input type="checkbox" value="eggAllergy">Egg Allergy</input></label>
                 <label><input type="checkbox" value="soyAllergy">Soy Allergy</input></label>
             </div>
+        </button>
         </div>
+        
 
         <div class=units>
-            <label for='Units-dd'><b>Measurement unit</b></label>
+            <label for='Units-dd'><b>Unit</b></label>
             <select id='Units-dd' name='Units'>
                 <option value='metric (do not use cups, only metric units)'>Metric</option>
                 <option value='US cups'>US cups</option>
@@ -93,9 +89,22 @@
             </select>
         </div>
     </div>
+    <div class="tag-container" id="tag-container">
+
+        <span class="tag">Pasta</span>
+        <span class="tag">Pizza</span>
+        <span class="tag">Sushi</span>
+        <span class="tag">Steak</span>
+        <span class="tag">Salad</span>
+        <span class="tag">Soup</span>
+        <span class="tag">Bread</span>
+        <span class="tag">Rice</span>
+        <span class="tag">Fish</span>
+        <span class="tag">Chicken</span>
+    </div>
 
 
-        </div>
+</div>
 
 
 </div>

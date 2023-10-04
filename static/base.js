@@ -40,3 +40,4 @@ if (savedDarkModeState === 'true') {
     toggleSwitch.checked = true;
     toggleSwitch.dispatchEvent(new Event('change')); // Trigger change event to apply dark mode
 }
+
