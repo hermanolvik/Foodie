@@ -14,7 +14,29 @@ kitchens = [
     'Sweden',
     'Greece',
     'England',
+    'Italy'
     'India'
+]
+
+# Intitialize portions
+
+portions = range(1, 8)
+
+# Initialize dietary restrictions
+
+restrictions = [
+    'Lactose', 
+    'Gluten', 
+    'Vegetarian', 
+    'Vegan', 
+    'Pescetarian',
+    'Kosher',
+    'Keto',
+    'Fish Allergy',
+    'Nut Allergy',
+    'Egg Allergy',
+    'Soy Allergy',
+    'Fruitarian'
 ]
 
 def parse_recipe(generated_text):
@@ -93,7 +115,7 @@ def generate_recipe_image(title):
 @app.route("/home")
 def main():
     # path = os.path.join(os.path.dirname(__file__), 'Front-End', 'main.html')
-    return render_template('main.html', kitchens = kitchens)
+    return render_template('main.html', kitchens = kitchens, restrictions = restrictions, portions = portions)
 
 
 @app.route('/recipe')

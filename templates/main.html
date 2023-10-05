@@ -36,20 +36,14 @@
     <div class="special-input">
 
 
-        <div class="portions">
-            <label for='Portions-dd'><b id="portions-id" >Portions</b></label>
-            <select id='Portions-dd' name='Portions'>
-                <option value='1'>1</option>
-                <option value='2'>2</option>
-                <option value='3'>3</option>
-                <option value='4'>4</option>
-                <option value='5'>5</option>
-                <option value='6'>6</option>
-                <option value='7'>7</option>
-                <option value='8'>8</option>
-                <option value='9'>9</option>
-            </select>
-        </div>
+<div class="portions">
+    <label for='Portions-dd'><b id="portions-id">Portions</b></label>
+    <select id='Portions-dd' name='Portions'>
+        {% for portion in portions %}
+            <option value='{{ portion }}'>{{ portion }}</option>
+        {% endfor %}
+    </select>
+</div>
         <br>
         <div class="kitchen-input">
             <h2>Select a Kitchen:</h2>
@@ -70,17 +64,9 @@
         <div class="dropdown">
             <button class="dropbtn">Dietary Restrictions</button>
             <div class="dropdown-content">
-                <label><input type="checkbox" value="lactose">Lactose</input></label>
-                <label><input type="checkbox" value="gluten">Gluten</input></label>
-                <label><input type="checkbox" value="vegetarian">Vegetarian</input></label>
-                <label><input type="checkbox" value="vegan">Vegan</input></label>
-                <label><input type="checkbox" value="pescetarian">Pescetarian</input></label>
-                <label><input type="checkbox" value="kosher">Kosher</input></label>
-                <label><input type="checkbox" value="keto">Keto</input></label>
-                <label><input type="checkbox" value="fishAllergy">Fish Allergy</input></label>
-                <label><input type="checkbox" value="nutAllergy">Nut Allergy</input></label>
-                <label><input type="checkbox" value="eggAllergy">Egg Allergy</input></label>
-                <label><input type="checkbox" value="soyAllergy">Soy Allergy</input></label>
+                {% for restrictions in restrictions %}
+                <label><input type="checkbox" value="{{ restrictions }}">{{ restrictions }}</input></label>
+                {% endfor %}
             </div>
         </div>
 
