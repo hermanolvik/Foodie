@@ -80,7 +80,7 @@ document.getElementById('search-button').addEventListener('click', function () {
             // timer
             setTimeout(function () {
                 resetPageAppearance();
-            }, 6000);
+            }, 7000);
             
 
         })
@@ -89,6 +89,8 @@ document.getElementById('search-button').addEventListener('click', function () {
 
 });
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
 
     const addButton = document.getElementById('add-tag');
@@ -96,30 +98,44 @@ document.addEventListener("DOMContentLoaded", function () {
     const tagContainer = document.getElementById('tag-container');
     
 
-    addButton.addEventListener('click', function(e) {
-
+    function addTag() {
         const tagValue = inputBox.value;
-        if (tagValue.trim() === '') { // om input är dom, returna
-            return; 
+        if (tagValue.trim() === '') { // Om input är tom, returnera
+            return;
         }
-        
+
         // Check if tag already exists
         const existingTags = tagContainer.querySelectorAll('.tag');
-        for (let i = 0; i < existingTags.length; i++) { // gör inget om tag redan finns
+        for (let i = 0; i < existingTags.length; i++) { // Gör inget om tag redan finns
             if (existingTags[i].textContent === tagValue) {
-                return; 
+                return;
             }
         }
-        
+
         const newTag = document.createElement('span');
-        newTag.classList.add('tag'); 
-        newTag.textContent = tagValue; 
-        newTag.addEventListener('click',removeTag); 
-        tagContainer.appendChild(newTag); 
+        const toggleSwitch = document.getElementById('toggleSwitch');
+        newTag.classList.add('tag');
+        if (toggleSwitch.checked) {
+            newTag.classList.add('dark-tag');
+        } else {
+            newTag.classList.add('light-tag');
+        }
+        newTag.textContent = tagValue;
+        newTag.addEventListener('click', removeTag);
+        tagContainer.appendChild(newTag);
 
         inputBox.value = '';
-    })
+        inputBox.focus();
+    }
 
+    addButton.addEventListener('click', addTag);
+
+    // Lyssna på Enter-tangenten
+    inputBox.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            addTag();
+        }
+    });
     
 
 });
@@ -171,3 +187,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const btn = document.getElementById('something-else');
+    let hoverTimeout;
+    
+    btn.addEventListener('mouseover', function() {
+      hoverTimeout = setTimeout(() => {
+        btn.classList.add('hovered');
+        btn.textContent = "Feeling Fabolous";
+      }, 5000); // 5 sekunder
+    });
+  
+    btn.addEventListener('mouseout', function() {
+      clearTimeout(hoverTimeout);
+      btn.classList.remove('hovered');
+      btn.textContent = "Feeling Lazy";
+    });
+  });
+  

@@ -22,14 +22,20 @@
         </div>
 
         <button type="submit" class="something-else" id="add-tag">Add</button>
-        <button type="submit" class="search-button" id="search-button">Search</button>
-        <button type="submit" class="something-else" id="something-else">Feeling Lazy</button>
+        
+       
 
 
 
 
 
     </div>
+
+    <div class="tag-container" id="tag-container">
+
+
+    </div>
+
     
     <div class="special-input">
 
@@ -50,7 +56,7 @@
         </div>
         
         <div class="kitchen-input">
-            <label for="kitchens"><b id="portions-id">Kitchen:</b></label>
+            <label for="kitchens"><b id="kitchens-id">Kitchen:</b></label>
             <select id="kitchens" name="kitchens">
                 {% for kitchen in kitchens %}
                 <option value="{{ kitchen }}">{{ kitchen }}</option>
@@ -60,7 +66,7 @@
 
 
         <div class="dropdown">
-            <label><b>Dietary Restrictions</b></label>
+            <label><b id="restrictions">Dietary Restrictions</b></label>
             <button class="dropbtn" (click)="showDropDown=!showDropDown">
                 Select
             <div class="dropdown-content">
@@ -81,7 +87,7 @@
         
 
         <div class=units>
-            <label for='Units-dd'><b>Unit</b></label>
+            <label for='Units-dd'><b id="unit">Unit</b></label>
             <select id='Units-dd' name='Units'>
                 <option value='metric (do not use cups, only metric units)'>Metric</option>
                 <option value='US cups'>US cups</option>
@@ -89,20 +95,12 @@
             </select>
         </div>
     </div>
-    <div class="tag-container" id="tag-container">
 
-        <span class="tag">Pasta</span>
-        <span class="tag">Pizza</span>
-        <span class="tag">Sushi</span>
-        <span class="tag">Steak</span>
-        <span class="tag">Salad</span>
-        <span class="tag">Soup</span>
-        <span class="tag">Bread</span>
-        <span class="tag">Rice</span>
-        <span class="tag">Fish</span>
-        <span class="tag">Chicken</span>
+    <div class="button-container"> 
+        <button type="submit" class="search-button" id="search-button">Search</button>
+        <button type="submit" class="something-else" id="something-else">Feeling Lazy</button>
     </div>
-
+    
 
 </div>
 
