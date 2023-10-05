@@ -83,12 +83,17 @@ nav a.active {
     color: black;
 }
 
-.dark-portions{
+.special-input-dark{
     margin: 10px;
-    color: white; 
+    color: rgb(221, 221, 221); 
 }
 
 .portions{
+    margin: 10px;
+    color: black;
+}
+
+.special-input-text{
     margin: 10px;
     color: black;
 }
