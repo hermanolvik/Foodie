@@ -6,8 +6,6 @@ document.getElementById('search-button').addEventListener('click', function () {
     //data will contain the string that was written in the search box on the first page
     const data = document.getElementById('tag-container');
     
-    
-    const tagContainer = document.getElementById('tag-container');
 
     const tagElements = data.querySelectorAll(".tag");
     
@@ -82,7 +80,7 @@ document.getElementById('search-button').addEventListener('click', function () {
             // timer
             setTimeout(function () {
                 resetPageAppearance();
-            }, 6000);
+            }, 7000);
             
 
         })
@@ -91,6 +89,8 @@ document.getElementById('search-button').addEventListener('click', function () {
 
 });
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
 
     const addButton = document.getElementById('add-tag');
@@ -98,30 +98,48 @@ document.addEventListener("DOMContentLoaded", function () {
     const tagContainer = document.getElementById('tag-container');
     
 
-    addButton.addEventListener('click', function(e) {
-
+    function addTag() {
         const tagValue = inputBox.value;
-        console.log(tagValue);
-        
+        if (tagValue.trim() === '') { // Om input är tom, returnera
+            return;
+        }
+
+        // Check if tag already exists
+        const existingTags = tagContainer.querySelectorAll('.tag');
+        for (let i = 0; i < existingTags.length; i++) { // Gör inget om tag redan finns
+            if (existingTags[i].textContent === tagValue) {
+                return;
+            }
+        }
+
         const newTag = document.createElement('span');
-        newTag.classList.add('tag'); 
-        newTag.textContent = tagValue; // add text to element
-        newTag.addEventListener('click',removeTag);
-        tagContainer.appendChild(newTag); 
+        const toggleSwitch = document.getElementById('toggleSwitch');
+        newTag.classList.add('tag');
+        if (toggleSwitch.checked) {
+            newTag.classList.add('dark-tag');
+        } else {
+            newTag.classList.add('light-tag');
+        }
+        newTag.textContent = tagValue;
+        newTag.addEventListener('click', removeTag);
+        tagContainer.appendChild(newTag);
 
         inputBox.value = '';
-    })
+        inputBox.focus();
+    }
 
-    // Add event listener to all elements with class 'tag'
-    const tags = document.querySelectorAll('.tag');
-    tags.forEach(tag => {
-        tag.addEventListener('click', function(e) {
-            console.log('Clicked on tag:', tag.textContent);
-            // Add your code here to handle the click event
-        });
+    addButton.addEventListener('click', addTag);
+
+    // Lyssna på Enter-tangenten
+    inputBox.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            addTag();
+        }
     });
+    
 
 });
+
 function removeTag(event){
     const clickedTag = event.target;
     clickedTag.remove();
@@ -169,3 +187,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const btn = document.getElementById('something-else');
+    let hoverTimeout;
+    
+    btn.addEventListener('mouseover', function() {
+      hoverTimeout = setTimeout(() => {
+        btn.classList.add('hovered');
+        btn.textContent = "Feeling Fabolous";
+      }, 5000); // 5 sekunder
+    });
+  
+    btn.addEventListener('mouseout', function() {
+      clearTimeout(hoverTimeout);
+      btn.classList.remove('hovered');
+      btn.textContent = "Feeling Lazy";
+    });
+  });
+  
