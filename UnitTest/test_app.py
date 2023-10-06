@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import patch, Mock
 from app import app, generate_recipe, parse_recipe
 
+
 class TestFlaskApp(unittest.TestCase):
 
     def setUp(self):
