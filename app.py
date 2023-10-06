@@ -90,14 +90,15 @@ def generate_recipe_image(title):
         n=1,
         size="256x256"
     )
+    global image_url
     image_url = response['data'][0]['url']
-    img_response = requests.get(image_url)
-    image = Image.new('RGB', (256, 256), color='white')
-    draw = ImageDraw.Draw(image)
-    font = ImageFont.load_default()
-    img = Image.open(BytesIO(img_response.content))
-    image.paste(img, (0, 0))
-    image.save('static/recipe_image.png')
+    # img_response = requests.get(image_url)
+    # image = Image.new('RGB', (256, 256), color='white')
+    # draw = ImageDraw.Draw(image)
+    # font = ImageFont.load_default()
+    # img = Image.open(BytesIO(img_response.content))
+    # image.paste(img, (0, 0))
+    # image.save('static/recipe_image.png')
 
 
 @app.route("/")
@@ -112,7 +113,7 @@ def recipe():
     title = request.args.get("title")
     ingredients = request.args.get('ingredients')
     instructions = request.args.get('instructions')
-    recipe_image_url = request.args.get('static/recipe_image.png')
+    recipe_image_url = image_url
     return render_template('recipe.html', title=title, ingredients=ingredients, instructions=instructions, recipe_image_url=recipe_image_url)
 
 
@@ -138,8 +139,7 @@ def process_prompt():
 def create_image():
     # URL of the webpage you want to scrape
     url = request.args.get('url')
-    print(url)
-    # # Send an HTTP GET request to the URL
+    # Send an HTTP GET request to the URL
     response = requests.get(url)
 
     # Check if the request was successful (status code 200)
@@ -158,6 +158,7 @@ def create_image():
         img_tag = soup.find('img', id='recipe-image')
         img_logo = soup.find('img', id='logo-image')
 
+
         if img_tag:
             img_url = img_tag.get('src')
             img_url = urljoin(url, img_url)
@@ -172,29 +173,26 @@ def create_image():
             # Check if the image download was successful
             if img_response.status_code == 200:
 
-                bordered_image = Image.new('RGB', (700, 1050), color='white')
+                bordered_image = Image.new('RGB', (1050, 700), color='white')
 
                 # Create an image with the extracted text
-                image = Image.new('RGB', (600, 950), (255, 196, 107))
+                image = Image.new('RGB', (950, 600), (242, 203, 153))
                 draw = ImageDraw.Draw(image)
-                # font = ImageFont.load_default()
 
                 # Set the text color and size
                 text_color = 'black'
 
                 title_font = ImageFont.truetype('arial.ttf', 35)
                 ingredients_font = ImageFont.truetype('arial.ttf', 20)
-                instructions_font = ImageFont.truetype('arial.ttf', 20)
 
                 title_pos = (20, 100)
                 ingredients_pos = (20, 150)
-                instructions_pos = (200, 200)
 
                 draw.text(title_pos, title_text, fill=text_color, font=title_font)
-                draw.text(ingredients_pos, ingredients, fill=text_color, font=ingredients_font)
-                # draw.text(instructions_pos, instructions, fill=text_color, font=instructions_font)
+                draw.text(ingredients_pos, ingredients, fill=text_color, font=ingredients_font, spacing=-2)
 
-                # Open and paste the downloaded image onto the generated image
+
+            # Open and paste the downloaded image onto the generated image
                 img = Image.open(BytesIO(img_response.content))
                 # image.paste(img, (300, 150))  # Adjust the position as needed
 
@@ -216,12 +214,12 @@ def create_image():
                 rounded_img.putalpha(mask)
 
                 # Paste the rounded logo onto the image with transparency
-                image.paste(rounded_img, (300, 150), rounded_img)
+                image.paste(rounded_img, (600, 150), rounded_img)
 
                 img_logo = Image.open(BytesIO(img_logo_response.content))
                 img_logo = img_logo.convert('RGBA')
                 resized_logo = img_logo.resize((209, 64))
-                image.paste(resized_logo, (180, 20), resized_logo)
+                image.paste(resized_logo, (360, 20), resized_logo)
 
                 bordered_image.paste(image, (50, 50))
 
