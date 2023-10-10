@@ -1,38 +1,30 @@
-addEventListener("DOMContentLoaded", (event) => {
-    imageElement = document.getElementById('recipe-image');
-    imageElement.style.display = "block";
-});
+document.getElementById("share-button").addEventListener("click", function() {
+    // Get the current page URL
+    var pageUrl = window.location.href;
 
-document.getElementById('share-button').addEventListener('click', function() {
+    // Send an AJAX request to your Flask server to trigger the download
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/download_image?url=" + encodeURIComponent(pageUrl), true);
+    xhr.responseType = "blob";  // Set the response type to blob
 
-    const currentPageURL = window.location.href;
-    const encodedURL = encodeURIComponent(currentPageURL);
-    console.log('Current Page URL:', encodedURL);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            // Create a URL for the blob response
+            var blob = new Blob([xhr.response], { type: "image/png" });
+            var url = window.URL.createObjectURL(blob);
 
-    // Use the fetch API to request the image generation
-    fetch('/create-image?url=' + encodedURL)
-        .then(response => response.blob())  // Parse the response as a Blob
-        .then(blob => {
             // Create a temporary <a> element to trigger the download
-            const a = document.createElement('a');
-            a.style.display = 'none';
-
-            // Create a Blob URL for the image data
-            const url = window.URL.createObjectURL(blob);
-
-            // Set the href and download attributes of the <a> element
+            var a = document.createElement("a");
             a.href = url;
-            a.download = 'generated_image.png';
+            a.download = "generated_image.png";
 
-            // Trigger a click event on the <a> element to initiate the download
-            document.body.appendChild(a);
+            // Trigger the click event on the <a> element to initiate the download
             a.click();
 
-            // Clean up by revoking the Blob URL and removing the <a> element
+            // Clean up by revoking the object URL
             window.URL.revokeObjectURL(url);
-            document.body.removeChild(a);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        }
+    };
+
+    xhr.send();
 });

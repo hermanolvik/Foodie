@@ -152,10 +152,10 @@ def process_prompt():
     return jsonify(recipe)
 
 
-@app.route('/create-image', methods=['GET'])
-def create_image():
+#@app.route('/create_image', methods=['GET'])
+def create_image(url):
     # URL of the webpage you want to scrape
-    url = request.args.get('url')
+    #url = request.args.get('url')
     # Send an HTTP GET request to the URL
     response = requests.get(url)
 
@@ -238,25 +238,14 @@ def create_image():
 
                 bordered_image.paste(image, (50, 50))
 
-                # Save the image
-                bordered_image.save('share_image.png')
+                # Save the image for debugging
+                #bordered_image.save('share_image.png')
 
-                # Create a BytesIO object to hold the image data
-                img_byte_array = io.BytesIO()
-                bordered_image.save(img_byte_array, format='PNG')
-                #img_byte_array.seek(0)
+                img_io = io.BytesIO()
+                bordered_image.save(img_io, 'PNG')
+                img_io.seek(0)
 
-                # Create a response with the image data and appropriate headers
-                response = send_file(
-                    img_byte_array,
-                    as_attachment=True,
-                    download_name='generated_image.png',  # Specify the filename
-                    #mimetype='image/png',  # Set the appropriate MIME type
-                )
-
-                return response
-
-                #return bordered_image
+                return img_io
 
             else:
                 print(f"Failed to download image from {img_url}")
@@ -264,6 +253,15 @@ def create_image():
             print("Image not found on the webpage.")
     else:
         print("Failed to retrieve the webpage. Status code:", response.status_code)
+
+
+@app.route('/download_image')
+def download_image():
+    # Generate the image
+    img_io = create_image(request.args.get('url'))
+
+    # Send the image as a response
+    return send_file(img_io, as_attachment=True, download_name='generated_image.png')
 
 
 if __name__ == '__main__':
