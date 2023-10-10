@@ -1,6 +1,7 @@
+import io
 from urllib.parse import urljoin, unquote
 import openai
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file
 import re
 import requests
 from bs4 import BeautifulSoup
@@ -114,13 +115,6 @@ def generate_recipe_image(title):
     )
     global image_url
     image_url = response['data'][0]['url']
-    # img_response = requests.get(image_url)
-    # image = Image.new('RGB', (256, 256), color='white')
-    # draw = ImageDraw.Draw(image)
-    # font = ImageFont.load_default()
-    # img = Image.open(BytesIO(img_response.content))
-    # image.paste(img, (0, 0))
-    # image.save('static/recipe_image.png')
 
 
 @app.route("/")
@@ -157,6 +151,7 @@ def process_prompt():
     generate_recipe_image(recipe.get('title'))
     return jsonify(recipe)
 
+
 @app.route('/create-image', methods=['GET'])
 def create_image():
     # URL of the webpage you want to scrape
@@ -180,7 +175,6 @@ def create_image():
         img_tag = soup.find('img', id='recipe-image')
         img_logo = soup.find('img', id='logo-image')
 
-
         if img_tag:
             img_url = img_tag.get('src')
             img_url = urljoin(url, img_url)
@@ -198,7 +192,7 @@ def create_image():
                 bordered_image = Image.new('RGB', (1050, 700), color='white')
 
                 # Create an image with the extracted text
-                image = Image.new('RGB', (950, 600), (242, 203, 153))
+                image = Image.new('RGB', (950, 600), (222, 222, 222))
                 draw = ImageDraw.Draw(image)
 
                 # Set the text color and size
@@ -213,8 +207,7 @@ def create_image():
                 draw.text(title_pos, title_text, fill=text_color, font=title_font)
                 draw.text(ingredients_pos, ingredients, fill=text_color, font=ingredients_font, spacing=-2)
 
-
-            # Open and paste the downloaded image onto the generated image
+                # Open and paste the downloaded image onto the generated image
                 img = Image.open(BytesIO(img_response.content))
                 # image.paste(img, (300, 150))  # Adjust the position as needed
 
@@ -248,7 +241,22 @@ def create_image():
                 # Save the image
                 bordered_image.save('share_image.png')
 
-                return 'success'
+                # Create a BytesIO object to hold the image data
+                img_byte_array = io.BytesIO()
+                bordered_image.save(img_byte_array, format='PNG')
+                #img_byte_array.seek(0)
+
+                # Create a response with the image data and appropriate headers
+                response = send_file(
+                    img_byte_array,
+                    as_attachment=True,
+                    download_name='generated_image.png',  # Specify the filename
+                    #mimetype='image/png',  # Set the appropriate MIME type
+                )
+
+                return response
+
+                #return bordered_image
 
             else:
                 print(f"Failed to download image from {img_url}")
