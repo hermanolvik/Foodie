@@ -16,7 +16,7 @@ kitchens = [
     'Sweden',
     'Greece',
     'England',
-    'Italy'
+    'Italy',
     'India'
 ]
 
@@ -99,7 +99,7 @@ def generate_recipe(json_object):
     prompt += f" The recipe should serve {num_portions} portions. "
     if int_kitchens != 'All':
         prompt += f" Restrict to recepies from {int_kitchens}."
-    prompt += " Recipe:"
+    prompt += "Maximum cooking time 30 min, display cooking time. Only use ingredients given by user. Recipe:"
 
     # Make API request
     response = openai.Completion.create(
