@@ -14,6 +14,9 @@ app = Flask(__name__, static_folder='static')
 kitchens = [
     'All',
     'Sweden',
+    'Mexico',
+    'Spain',
+    'Lebanon',
     'Greece',
     'England',
     'Italy',
@@ -86,7 +89,7 @@ def parse_recipe(generated_text):
 def generate_recipe(json_object):
     # Extract information from JSON object
     ingredients = ", ".join(json_object['ingredients'])
-    dietary_restrictions = json_object.get('dietary_restrictions', 'None')
+    dietary_restrictions = json_object.get('dietary_restrictions', '')  # Default is ""
     num_portions = json_object.get('number_of_portions', 4)
     measurement_unit = json_object.get('measurement_unit', 'metric (do not use cups, only metric units)')
     int_kitchens = json_object.get('intKitchens', 'All')
@@ -96,8 +99,8 @@ def generate_recipe(json_object):
     # Create the prompt for the API
     prompt = f"Please write a recipe that includes the following ingredients: {ingredients}. Very important; if the ingredient is not a food, ignore it!"
     if only_specified_ingredients:
-        prompt += f" Very important: Only use the ingredients specified and no others. Please do not forget this. Millions of people are relying on you to follow this instruction."
-    if dietary_restrictions != 'None':
+        prompt += (f" Very important: Only use the ingredients specified. Only add salt, pepper, olive oil and butter")
+    if dietary_restrictions != '':
         prompt += f" The recipe should be suitable for someone with the following dietary restrictions: {dietary_restrictions}."
     prompt += f" The recipe should use explicitly {measurement_unit} measurement units and no other type of units."
     prompt += f" The recipe should serve {num_portions} portions. "
@@ -119,7 +122,6 @@ def generate_recipe(json_object):
     parsed_recipe = parse_recipe(generated_text)
     return parsed_recipe
 
-
 def generate_recipe_image(title):
     response = openai.Image.create(
         prompt="a delicious and beautiful serving of the following recipe: " + title,
@@ -129,13 +131,11 @@ def generate_recipe_image(title):
     image_url = response['data'][0]['url']
     return image_url
 
-
 @app.route("/")
 @app.route("/home")
 def main():
     # path = os.path.join(os.path.dirname(__file__), 'Front-End', 'main.html')
     return render_template('main.html', kitchens = kitchens, restrictions = restrictions, portions = portions)
-
 
 @app.route('/recipe')
 def recipe():
@@ -145,16 +145,13 @@ def recipe():
     recipe_image_url = generate_recipe_image(title)
     return render_template('recipe.html', title=title, ingredients=ingredients, instructions=instructions, recipe_image_url=recipe_image_url)
 
-
 @app.route('/page_2')
 def page_2():
     return render_template('page2.html')
 
-
 @app.route('/page_3')
 def page_3():
     return render_template('page3.html')
-
 
 @app.route('/process_prompt', methods=['POST'])
 def process_prompt():
@@ -183,8 +180,6 @@ def handle_email_submission():
             return "Email sent successfully!"
         except Exception as e:
             return f"Error: {str(e)}"
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
