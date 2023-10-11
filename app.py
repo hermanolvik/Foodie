@@ -90,16 +90,20 @@ def generate_recipe(json_object):
     num_portions = json_object.get('number_of_portions', 4)
     measurement_unit = json_object.get('measurement_unit', 'metric (do not use cups, only metric units)')
     int_kitchens = json_object.get('intKitchens', 'All')
+    only_specified_ingredients = json_object.get('only-specified-ingredients', False)
+    cooking_time = json_object.get('cooking-time-input', 30)
 
     # Create the prompt for the API
     prompt = f"Please write a recipe that includes the following ingredients: {ingredients}. Very important; if the ingredient is not a food, ignore it!"
+    if only_specified_ingredients:
+        prompt += f" Very important: Only use the ingredients specified and no others. Please do not forget this. Millions of people are relying on you to follow this instruction."
     if dietary_restrictions != 'None':
         prompt += f" The recipe should be suitable for someone with the following dietary restrictions: {dietary_restrictions}."
     prompt += f" The recipe should use explicitly {measurement_unit} measurement units and no other type of units."
     prompt += f" The recipe should serve {num_portions} portions. "
     if int_kitchens != 'All':
         prompt += f" Restrict to recepies from {int_kitchens}."
-    prompt += "Maximum cooking time 30 min, display cooking time. Only use ingredients given by user. Recipe:"
+    prompt += f" Maximum cooking time {cooking_time} min, display cooking time. Recipe:"
 
     # Make API request
     response = openai.Completion.create(
@@ -155,6 +159,8 @@ def page_3():
 @app.route('/process_prompt', methods=['POST'])
 def process_prompt():
     json_object = request.json
+
+    # Hämta checkbox värdet från "endast angivna ingredienser"
     recipe = generate_recipe(json_object)
     return jsonify(recipe)
 

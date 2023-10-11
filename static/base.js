@@ -9,6 +9,9 @@ const idElements = [ // array av ojects
     { id: 'unit', darkClass: 'special-input-dark', lightClass: 'special-input-text' },
     { id: 'kitchens-id', darkClass: 'special-input-dark', lightClass: 'special-input-text' },
     { id: 'restrictions', darkClass: 'special-input-dark', lightClass: 'special-input-text' },
+    { id: 'cooking-time-id', darkClass: 'special-input-dark', lightClass: 'special-input-text'},
+    { id: 'only-specified-ingredients-label', darkClass: 'special-input-dark', lightClass: 'special-input-text'}
+    
 ];
 
 const classElements = [
