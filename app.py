@@ -106,7 +106,8 @@ def generate_recipe(json_object):
     prompt += f" The recipe should serve {num_portions} portions. "
     if int_kitchens != 'All':
         prompt += f" Restrict to recepies from {int_kitchens}."
-    prompt += f" Maximum cooking time {cooking_time} min, display cooking time. Recipe:"
+    prompt += f" Maximum cooking time {cooking_time} min, display cooking time. "
+    prompt += f" Return with information under headlines Recepie, Ingredients and Instructions. Recipe:"
 
     # Make API request
     response = openai.Completion.create(
