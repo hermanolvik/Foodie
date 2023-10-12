@@ -1,4 +1,9 @@
 
+const darkCircle = document.querySelector(".dark-circle");
+const lightedCircle = document.querySelector(".lighted-circle");
+let mouseX, mouseY;
+
+
 const toggleSwitchReallyDark = document.querySelector('.realDark');
 const toggleSwitchDark = document.querySelector('.normalDark');
 const sliders = document.querySelector('.sliderGroup');
@@ -23,11 +28,12 @@ function saveDarkModeState(isDarkMode, isReallyDarkMode) {
     localStorage.setItem('reallyDarkMode', isReallyDarkMode);
 }
 
-sliders.addEventListener('change', () => {
+sliders.addEventListener('change', (e) => {
 
     const isDarkMode = toggleSwitchDark.checked;
     const isReallyDarkMode = toggleSwitchReallyDark.checked;
     
+    console.log(e.pageX, e.pageY);
     saveDarkModeState(isDarkMode, isReallyDarkMode);
 
     const lightedCircle = document.querySelector('.lighted-circle');
@@ -36,9 +42,13 @@ sliders.addEventListener('change', () => {
     if(isReallyDarkMode){
         lightedCircle.style.display = "block";
         darkCircle.style.display = "block";
+        setCircles(mouseX, mouseY);
+       
+       
     }else{
         lightedCircle.style.display = "none";
         darkCircle.style.display = "none";
+        
     }
      
 
@@ -70,7 +80,7 @@ sliders.addEventListener('change', () => {
                 el.classList.remove(element.darkClass);
             }
         });
-    });
+    });  
 });
 
 
@@ -88,17 +98,21 @@ if (savedReallyDarkModeState === 'true') {
 }
 
 function onMouseMoveHandler(e) {
-    const darkCircle = document.querySelector(".dark-circle");
-    const lightedCircle = document.querySelector(".lighted-circle");
+    mouseX = e.pageX;
+    mouseY = e.pageY;
+    setCircles(mouseX, mouseY);
     
+}
+
+function setCircles(x, y){
     const darkCircleRadius = darkCircle.offsetWidth / 2;
     const lightCircleRadius = lightedCircle.offsetWidth / 2;
 
-    const darkLeftPosition = e.pageX - darkCircleRadius;
-    const darkTopPosition = e.pageY - darkCircleRadius;
+    const darkLeftPosition = mouseX - darkCircleRadius;
+    const darkTopPosition = mouseY - darkCircleRadius;
 
-    const lightLeftPosition = e.pageX - lightCircleRadius;
-    const lightTopPosition = e.pageY - lightCircleRadius;
+    const lightLeftPosition = mouseX - lightCircleRadius;
+    const lightTopPosition = mouseY - lightCircleRadius;
 
     darkCircle.style.left = darkLeftPosition + "px";
     darkCircle.style.top = darkTopPosition + "px";
@@ -106,6 +120,5 @@ function onMouseMoveHandler(e) {
     lightedCircle.style.left = lightLeftPosition + "px";
     lightedCircle.style.top = lightTopPosition + "px";
 }
-
 
 document.addEventListener("mousemove", onMouseMoveHandler);
