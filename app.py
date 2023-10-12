@@ -189,54 +189,39 @@ def create_image(url):
             # Check if the image download was successful
             if img_response.status_code == 200:
 
-                bordered_image = Image.new('RGB', (1050, 700), color='white')
+                bordered_image = Image.new('RGB', (1300, 750), color='white')
 
                 # Create an image with the extracted text
-                image = Image.new('RGB', (950, 600), (222, 222, 222))
+                image = Image.new('RGB', (600, 600), (255, 157, 130))
                 draw = ImageDraw.Draw(image)
+                # font = ImageFont.load_default()
 
                 # Set the text color and size
                 text_color = 'black'
 
                 title_font = ImageFont.truetype('arial.ttf', 35)
                 ingredients_font = ImageFont.truetype('arial.ttf', 20)
+                instructions_font = ImageFont.truetype('arial.ttf', 20)
 
-                title_pos = (20, 100)
-                ingredients_pos = (20, 150)
+                title_pos = (20, 20)
+                ingredients_pos = (20, 50)
+                instructions_pos = (200, 200)
 
                 draw.text(title_pos, title_text, fill=text_color, font=title_font)
                 draw.text(ingredients_pos, ingredients, fill=text_color, font=ingredients_font, spacing=-2)
+                # draw.text(instructions_pos, instructions, fill=text_color, font=instructions_font)
 
                 # Open and paste the downloaded image onto the generated image
                 img = Image.open(BytesIO(img_response.content))
-                # image.paste(img, (300, 150))  # Adjust the position as needed
-
-                # Create a mask for rounding the corners of the logo
-                mask = Image.new('L', img.size, 0)
-                draw = ImageDraw.Draw(mask)
-                roundness = -40
-                draw.ellipse(
-                    (roundness,
-                     roundness,
-                     img.width - roundness,
-                     img.height - roundness
-                     ),
-                    fill=255
-                )
-
-                # Apply the mask to round the corners of the logo
-                rounded_img = ImageOps.fit(img, mask.size, centering=(0.5, 0.5))
-                rounded_img.putalpha(mask)
-
-                # Paste the rounded logo onto the image with transparency
-                image.paste(rounded_img, (600, 150), rounded_img)
+                resized_img = img.resize((600, 600))
+                bordered_image.paste(resized_img, (650, 100))  # Adjust the position as needed
 
                 img_logo = Image.open(BytesIO(img_logo_response.content))
                 img_logo = img_logo.convert('RGBA')
                 resized_logo = img_logo.resize((209, 64))
-                image.paste(resized_logo, (360, 20), resized_logo)
+                bordered_image.paste(resized_logo, (550, 20), resized_logo)
 
-                bordered_image.paste(image, (50, 50))
+                bordered_image.paste(image, (50, 100))
 
                 # Save the image for debugging
                 #bordered_image.save('share_image.png')
