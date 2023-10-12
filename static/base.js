@@ -1,3 +1,5 @@
+const darkLogo = document.getElementById('logoDark');
+const lightLogo = document.getElementById('search-logo');
 
 const darkCircle = document.querySelector(".dark-circle");
 const lightedCircle = document.querySelector(".lighted-circle");
@@ -16,6 +18,8 @@ const idElements = [ // array av ojects
     { id: 'unit', darkClass: 'special-input-dark', lightClass: 'special-input-text' },
     { id: 'kitchens-id', darkClass: 'special-input-dark', lightClass: 'special-input-text' },
     { id: 'restrictions', darkClass: 'special-input-dark', lightClass: 'special-input-text' },
+    { id: 'headerText', darkClass: 'special-input-dark', lightClass: 'special-input-text' },
+    { id: 'headerText2', darkClass: 'special-input-dark', lightClass: 'special-input-text' },
 ];
 
 const classElements = [
@@ -50,7 +54,13 @@ sliders.addEventListener('change', (e) => {
         darkCircle.style.display = "none";
         
     }
-     
+    if(isDarkMode){
+        lightLogo.style.display = "none";
+        darkLogo.style.display = "block";
+    }else{
+        darkLogo.style.display = "none";
+        lightLogo.style.display = "block";
+    }
 
     idElements.forEach(element => { // loopa igenom varje element i arrayn
         const el = document.getElementById(element.id); 
@@ -122,3 +132,4 @@ function setCircles(x, y){
 }
 
 document.addEventListener("mousemove", onMouseMoveHandler);
+

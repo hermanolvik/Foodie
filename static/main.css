@@ -191,6 +191,12 @@
     z-index: 2; 
 }
 
+#logoDark {
+    position: relative;
+    z-index: 2;
+    display: none;
+}
+
 
 #svg-view {
     width: 252px;
