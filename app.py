@@ -2,6 +2,8 @@ import io
 from urllib.parse import urljoin, unquote
 import openai
 from flask import Flask, render_template, request, jsonify, send_file
+import smtplib
+from email.mime.text import MIMEText
 import re
 import requests
 from bs4 import BeautifulSoup
@@ -44,6 +46,19 @@ restrictions = [
     'Soy Allergy',
     'Fruitarian'
 ]
+
+def send_email(subject, body, sender, recipients, password):
+    msg = MIMEText(body)
+    msg['Subject'] = subject
+    msg['From'] = sender
+    msg['To'] = ', '.join(recipients)
+    with smtplib.SMTP('smtp.office365.com', 587) as server:
+       
+        server.starttls()
+        server.login(sender, password)
+        server.sendmail(sender, [recipients], msg.as_string())
+        server.quit()
+    print("Message sent!")
 
 def parse_recipe(generated_text):
     # Initialize empty dictionary to store recipe components
@@ -150,6 +165,27 @@ def process_prompt():
     #generate the image here so that we dont get a new image each time we refresh
     generate_recipe_image(recipe.get('title'))
     return jsonify(recipe)
+
+@app.route('/send_email', methods=['POST'])
+def handle_email_submission():
+    if request.method == 'POST':
+        recipient_email = request.form['userEmail']
+        subject = "Contact Form Submission"
+        message = request.form['userMessage']
+        thank_you_message = "Thank you for your feedback, our team will respond shortly"
+        sender_email = "foodie.app@outlook.com"  # Your email address
+        password = "bdgkrknqgthqgeih"  # Your email password
+
+        recipients = [recipient_email]
+        message += f"\n\nContact customer: {', '.join(recipients)}"
+
+        try:
+            send_email("noReply", thank_you_message, sender_email, recipients, password)
+            send_email(subject, message, sender_email, [sender_email], password)
+            return "Email sent successfully!"
+        except Exception as e:
+            return f"Error: {str(e)}"
+
 
 
 #@app.route('/create_image', methods=['GET'])

@@ -92,6 +92,28 @@
     </div>
 </div>
 
+<div class="contact">
+    <div>
+        <h1 id="contactHeader">Contact Us</h1>
+    </div>
+    
+    <form method="POST" action="/send_email">
+        <div class="email-box">
+            <label for="userEmail">Your Email:</label>
+            <input type="email" id="userEmail" name="userEmail" required>
+        </div>
+        <div class="message-box">
+            <label for="userMessage">Message:</label>
+            <textarea id="userMessage" name="userMessage" rows="4" required></textarea>
+        </div>
+        <div class="submit-button">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    
+</div>
+
+
 <script src="{{ url_for('static', filename='about.js') }}"></script>
 
 {% endblock %}
