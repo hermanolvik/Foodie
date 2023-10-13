@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const newTag = document.createElement('span');
-        const toggleSwitch = document.getElementById('toggleSwitch');
+        const toggleSwitch = document.getElementById('normalDarkToggle');
         newTag.classList.add('tag');
         if (toggleSwitch.checked) {
             newTag.classList.add('dark-tag');
