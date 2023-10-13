@@ -99,6 +99,19 @@ nav a.active {
     color: black;
 }
 
+.dark-mode-body .search-button,
+.dark-mode-body .something-else {
+    background-color: rgba(48,49,52);
+    color: white;
+    border: 1px solid transparent;
+}
+
+.dark-mode-body .search-button:hover,
+.dark-mode-body .something-else:hover {
+    border-color: #888;
+}
+
+
 .about-dark{
     font-family: Arial,Helvetica,sans-serif;
     font-weight: 900;
