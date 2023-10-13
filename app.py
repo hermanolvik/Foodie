@@ -59,7 +59,7 @@ def send_email(subject, body, sender, recipients, password):
 
 def parse_recipe(generated_text):
     # Initialize empty dictionary to store recipe components
-    recipe_json = {'title': '', 'ingredients': '', 'instructions': ''}
+    recipe_json = {'title': '', 'ingredients': '', 'instructions': '', 'cookingTime': '', 'dietaryRestrictions': '', 'intKitchens': ''}
 
     # Try to separate out the title, ingredients, and instructions
     lines = generated_text.split('\n')
@@ -94,7 +94,7 @@ def generate_recipe(json_object):
     measurement_unit = json_object.get('measurement_unit', 'metric (do not use cups, only metric units)')
     int_kitchens = json_object.get('intKitchens', 'All')
     only_specified_ingredients = json_object.get('only-specified-ingredients', False)
-    cooking_time = json_object.get('cooking-time-input', 30)
+    cookingTime = json_object.get('cookingTime', 30)
 
     # Create the prompt for the API
     prompt = f"Please write a recipe that includes the following ingredients: {ingredients}. Very important; if the ingredient is not a food, ignore it!"
@@ -106,7 +106,7 @@ def generate_recipe(json_object):
     prompt += f" The recipe should serve {num_portions} portions. "
     if int_kitchens != 'All':
         prompt += f" Restrict to recepies from {int_kitchens}."
-    prompt += f" Maximum cooking time {cooking_time} min, display cooking time. "
+    prompt += f" Maximum cooking time {cookingTime} min, display cooking time. "
     prompt += f" Return with information under headlines Recepie, Ingredients and Instructions. Recipe:"
 
     # Make API request
@@ -121,6 +121,10 @@ def generate_recipe(json_object):
 
     # Parse the recipe text
     parsed_recipe = parse_recipe(generated_text)
+    parsed_recipe['intKitchens'] = int_kitchens
+    parsed_recipe['dietaryRestrictions'] = dietary_restrictions
+    parsed_recipe['cookingTime'] = cookingTime
+
     return parsed_recipe
 
 def generate_recipe_image(title):
@@ -139,13 +143,33 @@ def main():
    
     return render_template('main.html', kitchens = kitchens, restrictions = restrictions, portions = portions )
 
+
+
+
 @app.route('/recipe')
 def recipe():
     title = request.args.get("title")
+    print(title)
     ingredients = request.args.get('ingredients')
+    print(ingredients)
     instructions = request.args.get('instructions')
+    print(instructions)
+    intKitchens = request.args.get('intKitchens')
+    print(intKitchens)
+    dietaryRestrictions = request.args.get('dietaryRestrictions')
+    print(dietaryRestrictions)
+    cookingTime = request.args.get('cookingTime')
+    print(cookingTime)
     recipe_image_url = generate_recipe_image(title)
-    return render_template('recipe.html', title=title, ingredients=ingredients, instructions=instructions, recipe_image_url=recipe_image_url)
+
+    return render_template('recipe.html', 
+                            title=title, 
+                            ingredients=ingredients, 
+                            instructions=instructions, 
+                            recipe_image_url=recipe_image_url,
+                            intKitchens=intKitchens,
+                            dietaryRestrictions=dietaryRestrictions,
+                            cookingTime=cookingTime)
 
 @app.route('/page_2')
 def page_2():
