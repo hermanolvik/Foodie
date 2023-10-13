@@ -130,7 +130,8 @@ def generate_recipe_image(title):
 @app.route("/home")
 def main():
     # path = os.path.join(os.path.dirname(__file__), 'Front-End', 'main.html')
-    return render_template('main.html', kitchens = kitchens, restrictions = restrictions, portions = portions)
+   
+    return render_template('main.html', kitchens = kitchens, restrictions = restrictions, portions = portions )
 
 
 @app.route('/recipe')

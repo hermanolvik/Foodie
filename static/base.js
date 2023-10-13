@@ -6,6 +6,7 @@ const lightedCircle = document.querySelector(".lighted-circle");
 let mouseX, mouseY;
 
 
+
 const toggleSwitchReallyDark = document.querySelector('.realDark');
 const toggleSwitchDark = document.querySelector('.normalDark');
 const sliders = document.querySelector('.sliderGroup');
@@ -37,7 +38,7 @@ sliders.addEventListener('change', (e) => {
     const isDarkMode = toggleSwitchDark.checked;
     const isReallyDarkMode = toggleSwitchReallyDark.checked;
     
-    console.log(e.pageX, e.pageY);
+    
     saveDarkModeState(isDarkMode, isReallyDarkMode);
 
     const lightedCircle = document.querySelector('.lighted-circle');
@@ -54,13 +55,7 @@ sliders.addEventListener('change', (e) => {
         darkCircle.style.display = "none";
         
     }
-    if(isDarkMode){
-        lightLogo.style.display = "none";
-        darkLogo.style.display = "block";
-    }else{
-        darkLogo.style.display = "none";
-        lightLogo.style.display = "block";
-    }
+ 
 
     idElements.forEach(element => { // loopa igenom varje element i arrayn
         const el = document.getElementById(element.id); 
@@ -91,6 +86,16 @@ sliders.addEventListener('change', (e) => {
             }
         });
     });  
+
+    if (lightLogo && darkLogo){
+        if(isDarkMode){
+            lightLogo.style.display = "none";
+            darkLogo.style.display = "block";
+        }else{
+            darkLogo.style.display = "none";
+            lightLogo.style.display = "block";
+        }
+    }       
 });
 
 

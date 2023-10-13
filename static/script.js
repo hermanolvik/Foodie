@@ -96,6 +96,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const addButton = document.getElementById('add-tag');
     const inputBox = document.getElementById('ingredient-field');
     const tagContainer = document.getElementById('tag-container');
+
+    // let darkModeState = localStorage.getItem('darkMode');
+    // if(darkModeState){
+    //     lightLogo.style.display = "none";
+    //     darkLogo.style.display = "block";
+    // }else{
+    //     darkLogo.style.display = "none";
+    //     lightLogo.style.display = "block";
+    // }
     
 
     function addTag() {
