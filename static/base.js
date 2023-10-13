@@ -1,5 +1,12 @@
 
-const toggleSwitch = document.getElementById('toggleSwitch');
+const darkCircle = document.querySelector(".dark-circle");
+const lightedCircle = document.querySelector(".lighted-circle");
+let mouseX, mouseY;
+
+
+const toggleSwitchReallyDark = document.querySelector('.realDark');
+const toggleSwitchDark = document.querySelector('.normalDark');
+const sliders = document.querySelector('.sliderGroup');
 const idElements = [ // array av ojects
     { id: 'Bbody', darkClass: 'dark-mode-body', lightClass: 'light-mode' },
     { id: 'Hheader', darkClass: 'dark-mode-head', lightClass: 'light-mode' },
@@ -19,14 +26,34 @@ const classElements = [
 ];
 
 // Function to save dark mode state to local storage
-function saveDarkModeState(isDarkMode) {
+function saveDarkModeState(isDarkMode, isReallyDarkMode) {
     localStorage.setItem('darkMode', isDarkMode);
+    localStorage.setItem('reallyDarkMode', isReallyDarkMode);
 }
 
-toggleSwitch.addEventListener('change', () => {
+sliders.addEventListener('change', (e) => {
 
-    const isDarkMode = toggleSwitch.checked;
-    saveDarkModeState(isDarkMode);
+    const isDarkMode = toggleSwitchDark.checked;
+    const isReallyDarkMode = toggleSwitchReallyDark.checked;
+    
+    console.log(e.pageX, e.pageY);
+    saveDarkModeState(isDarkMode, isReallyDarkMode);
+
+    const lightedCircle = document.querySelector('.lighted-circle');
+    const darkCircle = document.querySelector('.dark-circle');
+
+    if(isReallyDarkMode){
+        lightedCircle.style.display = "block";
+        darkCircle.style.display = "block";
+        setCircles(mouseX, mouseY);
+       
+       
+    }else{
+        lightedCircle.style.display = "none";
+        darkCircle.style.display = "none";
+        
+    }
+     
 
     idElements.forEach(element => { // loopa igenom varje element i arrayn
         const el = document.getElementById(element.id); 
@@ -34,7 +61,7 @@ toggleSwitch.addEventListener('change', () => {
         if (!el) { // om elementet ej exitsterar på sidan, gå till nästa element
             return;
         }
-        if (toggleSwitch.checked) { 
+        if (toggleSwitchDark.checked) { 
             el.classList.add(element.darkClass);
             el.classList.remove(element.lightClass);
         } else {
@@ -56,15 +83,45 @@ toggleSwitch.addEventListener('change', () => {
                 el.classList.remove(element.darkClass);
             }
         });
-    });
+    });  
 });
 
 
 
 // Check local storage for dark mode state on page load
 const savedDarkModeState = localStorage.getItem('darkMode');
+const savedReallyDarkModeState = localStorage.getItem('reallyDarkMode');
 if (savedDarkModeState === 'true') {
-    toggleSwitch.checked = true;
-    toggleSwitch.dispatchEvent(new Event('change')); // Trigger change event to apply dark mode
+    toggleSwitchDark.checked = true;
+    sliders.dispatchEvent(new Event('change')); // Trigger change event to apply dark mode
+}
+if (savedReallyDarkModeState === 'true') {
+    toggleSwitchReallyDark.checked = true;
+    sliders.dispatchEvent(new Event('change')); // Trigger change event to apply dark mode
 }
 
+function onMouseMoveHandler(e) {
+    mouseX = e.pageX;
+    mouseY = e.pageY;
+    setCircles(mouseX, mouseY);
+    
+}
+
+function setCircles(x, y){
+    const darkCircleRadius = darkCircle.offsetWidth / 2;
+    const lightCircleRadius = lightedCircle.offsetWidth / 2;
+
+    const darkLeftPosition = mouseX - darkCircleRadius;
+    const darkTopPosition = mouseY - darkCircleRadius;
+
+    const lightLeftPosition = mouseX - lightCircleRadius;
+    const lightTopPosition = mouseY - lightCircleRadius;
+
+    darkCircle.style.left = darkLeftPosition + "px";
+    darkCircle.style.top = darkTopPosition + "px";
+
+    lightedCircle.style.left = lightLeftPosition + "px";
+    lightedCircle.style.top = lightTopPosition + "px";
+}
+
+document.addEventListener("mousemove", onMouseMoveHandler);

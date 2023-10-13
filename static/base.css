@@ -172,4 +172,69 @@ nav a.active {
 }
 
 
+/* Change the background color of the slider when it's in the "off" (light mode) position */
+#realDarkToggle:checked + .slider {
+    background-color: darkgray;
+}
+
+/* Move the slider to the right (dark mode) when checked */
+#realDarkToggle:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Additional styles for the other slider (if needed) */
+#normalDarkToggle:checked + .slider {
+    background-color: darkgray;
+}
+
+#normalDarkToggle:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
 /*===================== END ======================*/
+
+/************************Really dark-Mode*************************/
+
+/* Add this CSS to create the black overlay */
+
+
+.lighted-circle, .dark-circle{
+    display: none;
+}
+/* Create a circular light effect around the cursor */
+/* Updated CSS for the glowing circular light effect */
+.lighted-circle {
+    position: absolute;
+    width: 80px; /* Adjust the size as needed */
+    height: 80px; /* Adjust the size as needed */
+    background-color:rgba(255, 255, 255, 0.7); /* Light background color with transparency */
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999; /* Place it on top of other content */
+    transform: translate( -50%, -50%);
+   
+    mix-blend-mode: screen;
+}
+
+
+
+.dark-circle {
+    position: absolute;
+    width: 18000px; /* Adjust the size as needed */
+    height: 18000px; /* Adjust the size as needed */
+    background-color:rgb(0, 0, 0); /* Light background color with transparency */
+    pointer-events: none;
+    z-index: 9998; /* Place it on top of other content */
+    opacity: 1; 
+   
+    -webkit-mask: radial-gradient(circle at center, transparent 60px, black 80px);
+
+    
+}
+
+
+
