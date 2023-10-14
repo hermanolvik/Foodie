@@ -14,7 +14,7 @@
             <h1>{{ title }}</h1>
             <p>Information about the dish: <br><br>
                 {% if intKitchens == 'All kitchen' %}
-                No specific country's kitchen noted <br>kitchens <br><br>
+                No specific country's kitchen noted <br><br>
                 {% else %}
                 Where does it come from: {{ intKitchens }} <br><br>
                 {% endif %}
@@ -24,7 +24,7 @@
                 No dietary restrictions noted. <br><br>
                 {% endif %}
                 {% if cookingTime %}
-                Time it takes to make: {{ cookingTime }} min
+                Maximum time it takes to make: {{ cookingTime }} min
                 {% endif %}
             </p>
         </div>
