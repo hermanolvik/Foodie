@@ -12,7 +12,7 @@ app = Flask(__name__, static_folder='static')
 
 # Initialize kitchens
 kitchens = [
-    'All',
+    'All kitchen',
     'Sweden',
     'Mexico',
     'Spain',
@@ -92,7 +92,7 @@ def generate_recipe(json_object):
     dietary_restrictions = json_object.get('dietary_restrictions', '')  # Default is ""
     num_portions = json_object.get('number_of_portions', 4)
     measurement_unit = json_object.get('measurement_unit', 'metric (do not use cups, only metric units)')
-    int_kitchens = json_object.get('intKitchens', 'All')
+    int_kitchens = json_object.get('intKitchens', 'All kitchen')
     only_specified_ingredients = json_object.get('only-specified-ingredients', False)
     cookingTime = json_object.get('cookingTime', 30)
 
@@ -104,7 +104,7 @@ def generate_recipe(json_object):
         prompt += f" The recipe should be suitable for someone with the following dietary restrictions: {dietary_restrictions}."
     prompt += f" The recipe should use explicitly {measurement_unit} measurement units and no other type of units."
     prompt += f" The recipe should serve {num_portions} portions. "
-    if int_kitchens != 'All':
+    if int_kitchens != 'All kitchen':
         prompt += f" Restrict to recepies from {int_kitchens}."
     prompt += f" Maximum cooking time {cookingTime} min, display cooking time. "
     prompt += f" Return with information under headlines Recepie, Ingredients and Instructions. Recipe:"
