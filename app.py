@@ -12,7 +12,7 @@ app = Flask(__name__, static_folder='static')
 
 # Initialize kitchens
 kitchens = [
-    'All',
+    'All kitchen',
     'Sweden',
     'Mexico',
     'Spain',
@@ -89,10 +89,10 @@ def parse_recipe(generated_text):
 def generate_recipe(json_object):
     # Extract information from JSON object
     ingredients = ", ".join(json_object['ingredients'])
-    dietary_restrictions = json_object.get('dietary_restrictions', '')  # Default is ""
+    dietary_restrictions = json_object.get('dietary_restrictions')
     num_portions = json_object.get('number_of_portions', 4)
     measurement_unit = json_object.get('measurement_unit', 'metric (do not use cups, only metric units)')
-    int_kitchens = json_object.get('intKitchens', 'All')
+    int_kitchens = json_object.get('intKitchens', 'All kitchen')
     only_specified_ingredients = json_object.get('only-specified-ingredients', False)
     cookingTime = json_object.get('cookingTime', 30)
 
@@ -100,11 +100,11 @@ def generate_recipe(json_object):
     prompt = f"Please write a recipe that includes the following ingredients: {ingredients}. Very important; if the ingredient is not a food, ignore it!"
     if only_specified_ingredients:
         prompt += (f" Very important: Only use the ingredients specified. Only add salt, pepper, olive oil and butter")
-    if dietary_restrictions != '':
+    if dietary_restrictions:
         prompt += f" The recipe should be suitable for someone with the following dietary restrictions: {dietary_restrictions}."
     prompt += f" The recipe should use explicitly {measurement_unit} measurement units and no other type of units."
     prompt += f" The recipe should serve {num_portions} portions. "
-    if int_kitchens != 'All':
+    if int_kitchens != 'All kitchen':
         prompt += f" Restrict to recepies from {int_kitchens}."
     prompt += f" Maximum cooking time {cookingTime} min, display cooking time. "
     prompt += f" Return with information under headlines Recepie, Ingredients and Instructions. Recipe:"

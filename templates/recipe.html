@@ -13,10 +13,20 @@
         <div class="TitleBox">
             <h1>{{ title }}</h1>
             <p>Information about the dish: <br><br>
+                {% if intKitchens == 'All kitchen' %}
+                No specific country's kitchen noted <br><br>
+                {% else %}
                 Where does it come from: {{ intKitchens }} <br><br>
+                {% endif %}
+                {% if dietaryRestrictions %}
                 Dietary restrictions: {{ dietaryRestrictions }} <br><br>
-                Time it takes to make: {{ cookingTime }} min
-            </p>     
+                {% else %}
+                No dietary restrictions noted. <br><br>
+                {% endif %}
+                {% if cookingTime %}
+                Maximum time it takes to make: {{ cookingTime }} min
+                {% endif %}
+            </p>
         </div>
         <div class="ImageBox">
             <img class="StockPic" id="recipe-image" src="{{recipe_image_url}}">
