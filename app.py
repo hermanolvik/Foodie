@@ -108,7 +108,7 @@ def generate_recipe(json_object):
         prompt += f" Restrict to recepies from {int_kitchens}."
     prompt += f" Maximum cooking time {cookingTime} min, display cooking time. "
     prompt += f" Return with information under headlines Recepie, Ingredients and Instructions. Recipe:"
-    print(only_specified_ingredients)
+
 
     # Make API request
     response = openai.Completion.create(
