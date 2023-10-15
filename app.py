@@ -93,7 +93,7 @@ def generate_recipe(json_object):
     num_portions = json_object.get('number_of_portions', 4)
     measurement_unit = json_object.get('measurement_unit', 'metric (do not use cups, only metric units)')
     int_kitchens = json_object.get('intKitchens', 'All')
-    only_specified_ingredients = json_object.get('only-specified-ingredients', False)
+    only_specified_ingredients = json_object.get('onlyMyIngredients', False)
     cookingTime = json_object.get('cookingTime', 30)
 
     # Create the prompt for the API
@@ -108,6 +108,7 @@ def generate_recipe(json_object):
         prompt += f" Restrict to recepies from {int_kitchens}."
     prompt += f" Maximum cooking time {cookingTime} min, display cooking time. "
     prompt += f" Return with information under headlines Recepie, Ingredients and Instructions. Recipe:"
+    print(only_specified_ingredients)
 
     # Make API request
     response = openai.Completion.create(

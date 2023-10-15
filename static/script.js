@@ -45,6 +45,7 @@ document.getElementById('search-button').addEventListener('click', function () {
     const selectedOption2 = selectElement2.options[selectedOptionIndex2];
     const intKitchens = selectedOption2.value;
     const cookingTime = document.getElementById('cooking-time-input').value;
+    const onlyMyIngredients = document.getElementById('only-specified-ingredients-checkbox');
     console.log(cookingTime);
     
     console.log(numPortions);
@@ -56,7 +57,8 @@ document.getElementById('search-button').addEventListener('click', function () {
         number_of_portions: numPortions,
         measurement_unit: unit,
         intKitchens: intKitchens,
-        cookingTime: cookingTime
+        cookingTime: cookingTime,
+        onlyMyIngredients: onlyMyIngredients.checked
     };
 
     // Send a POST request to the backend
