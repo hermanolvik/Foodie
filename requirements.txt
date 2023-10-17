@@ -1,2 +1,4 @@
 openai
 Flask
+beautifulsoup4
+Pillow
