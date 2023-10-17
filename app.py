@@ -270,9 +270,9 @@ def create_image(url):
                 # Set the text color and size
                 text_color = 'black'
 
-                title_font = ImageFont.truetype('arial.ttf', 35)
-                ingredients_font = ImageFont.truetype('arial.ttf', 20)
-                instructions_font = ImageFont.truetype('arial.ttf', 20)
+                title_font = ImageFont.truetype('static/arial.ttf', 35)
+                ingredients_font = ImageFont.truetype('static/arial.ttf', 20)
+                instructions_font = ImageFont.truetype('static/arial.ttf', 20)
 
                 title_pos = (20, 20)
                 ingredients_pos = (20, 50)
