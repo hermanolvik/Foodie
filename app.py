@@ -30,11 +30,9 @@ kitchens = [
 ]
 
 # Intitialize portions
-
 portions = range(1, 8)
 
 # Initialize dietary restrictions
-
 restrictions = [
     'Lactose', 
     'Gluten', 
@@ -50,6 +48,7 @@ restrictions = [
     'Fruitarian'
 ]
 
+
 def send_email(subject, body, sender, recipients, password):
     msg = MIMEText(body)
     msg['Subject'] = subject
@@ -62,6 +61,7 @@ def send_email(subject, body, sender, recipients, password):
         server.sendmail(sender, [recipients], msg.as_string())
         server.quit()
     print("Message sent!")
+
 
 def parse_recipe(generated_text):
     # Initialize empty dictionary to store recipe components
@@ -91,6 +91,7 @@ def parse_recipe(generated_text):
         recipe_json['instructions'] = '\n'.join(instructions)
 
     return recipe_json
+
 
 def generate_recipe(json_object):
     # Extract information from JSON object
@@ -134,6 +135,7 @@ def generate_recipe(json_object):
 
     return parsed_recipe
 
+
 def generate_recipe_image(title):
     response = openai.Image.create(
         prompt="a delicious and beautiful serving of the following recipe: " + title,
@@ -142,6 +144,8 @@ def generate_recipe_image(title):
     )
     global image_url
     image_url = response['data'][0]['url']
+    return image_url
+
 
 @app.route("/")
 @app.route("/home")
@@ -149,8 +153,6 @@ def main():
     # path = os.path.join(os.path.dirname(__file__), 'Front-End', 'main.html')
    
     return render_template('main.html', kitchens = kitchens, restrictions = restrictions, portions = portions )
-
-
 
 
 @app.route('/recipe')
@@ -178,13 +180,16 @@ def recipe():
                             dietaryRestrictions=dietaryRestrictions,
                             cookingTime=cookingTime)
 
+
 @app.route('/page_2')
 def page_2():
     return render_template('page2.html')
 
+
 @app.route('/page_3')
 def page_3():
     return render_template('page3.html')
+
 
 @app.route('/process_prompt', methods=['POST'])
 def process_prompt():
@@ -195,6 +200,7 @@ def process_prompt():
     #generate the image here so that we dont get a new image each time we refresh
     generate_recipe_image(recipe.get('title'))
     return jsonify(recipe)
+
 
 @app.route('/send_email', methods=['POST'])
 def handle_email_submission():
@@ -316,5 +322,3 @@ def download_image():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
