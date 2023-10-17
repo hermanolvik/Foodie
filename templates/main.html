@@ -11,37 +11,29 @@
 <div class="search">
     <div class="fire-container">
         {% include 'loading-animations.html' %}
-
         <img id="search-logo" src="{{ url_for('static', filename='logo.png') }}" alt="Search Logo" height="92"
             width="272">
+        <img id="logoDark" src="{{ url_for('static', filename='logo2.png') }}" alt="Search Logo" height="92"
+             width="272">
     </div>
     <div class="search-container">
         <div class="search-box">
             <input type="text" id="ingredient-field" name="q" placeholder="Input ingredients here">
-            
         </div>
-
         <button type="submit" class="something-else" id="add-tag">Add</button>
-
-        </div>
-
-    <div class="tag-container" id="tag-container">
-
-
     </div>
 
-    
+    <div class="tag-container" id="tag-container"></div>
+
     <div class="special-input">
-
-
-<div class="portions">
-    <label for='Portions-dd'><b id="portions-id">Portions</b></label>
-    <select id='Portions-dd' name='Portions'>
-        {% for portion in portions %}
-            <option value='{{ portion }}'>{{ portion }}</option>
-        {% endfor %}
-    </select>
-</div>
+        <div class="portions">
+            <label for='Portions-dd'><b id="portions-id">Portions</b></label>
+            <select id='Portions-dd' name='Portions'>
+                {% for portion in portions %}
+                <option value='{{ portion }}'>{{ portion }}</option>
+                {% endfor %}
+            </select>
+        </div>
         <br>
         <div class="kitchen-input">
             <label for="kitchens"><b id="kitchens-id">Kitchen:</b></label>
@@ -57,14 +49,14 @@
             <label><b id="restrictions">Dietary Restrictions</b></label>
             <button class="dropbtn" (click)="showDropDown=!showDropDown">
                 Select
-            <div class="dropdown-content">
-                {% for restrictions in restrictions %}
-                <label><input type="checkbox" value="{{ restrictions }}">{{ restrictions }}</input></label>
-                {% endfor %}
-            </div>
-        </button>
+                <div class="dropdown-content">
+                    {% for restrictions in restrictions %}
+                    <label><input type="checkbox" value="{{ restrictions }}">{{ restrictions }}</input></label>
+                    {% endfor %}
+                </div>
+            </button>
         </div>
-        
+
 
         <div class=units>
             <label for='Units-dd'><b id="unit">Unit</b></label>
@@ -74,13 +66,30 @@
                 <option value='imperial'>Imperial</option>
             </select>
         </div>
-    </div>
 
-    <div class="button-container"> 
+
+    </div>
+    <br>
+        <!-- Ny kod börjar här -->
+        <div>
+            <div class="cooking-time">
+                <label for="cooking-time-input"><b id="cooking-time-id">Cooking time (minutes):</b></label>
+                <input type="number" id="cooking-time-input" name="cooking-time" placeholder="Enter cooking time here" min="1">
+            </div>
+            <br>
+            <div class="only-specified-ingredients">
+                <label for="only-specified-ingredients"> <b id="only-specified-ingredients-label">Only use my ingredients</b></label>
+                <input type="checkbox" id="only-specified-ingredients-checkbox" name="only-specified-ingredients">
+            </div>
+        </div>
+    <!-- Ny kod slutar här -->
+
+
+    <div class="button-container">
         <button type="submit" class="search-button" id="search-button">Search</button>
         <button type="submit" class="something-else" id="something-else">Feeling Lazy</button>
     </div>
-    
+
 
 </div>
 
@@ -90,4 +99,5 @@
 
 <script src="{{ url_for('static', filename='animation-script.js') }}"></script>
 <script src="{{ url_for('static', filename='script.js') }}"></script>
+
 {% endblock %}

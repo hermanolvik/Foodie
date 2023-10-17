@@ -18,11 +18,14 @@ app = Flask(__name__, static_folder='static')
 
 # Initialize kitchens
 kitchens = [
-    'All',
+    'All kitchen',
     'Sweden',
+    'Mexico',
+    'Spain',
+    'Lebanon',
     'Greece',
     'England',
-    'Italy'
+    'Italy',
     'India'
 ]
 
@@ -62,7 +65,7 @@ def send_email(subject, body, sender, recipients, password):
 
 def parse_recipe(generated_text):
     # Initialize empty dictionary to store recipe components
-    recipe_json = {'title': '', 'ingredients': '', 'instructions': ''}
+    recipe_json = {'title': '', 'ingredients': '', 'instructions': '', 'cookingTime': '', 'dietaryRestrictions': '', 'intKitchens': ''}
 
     # Try to separate out the title, ingredients, and instructions
     lines = generated_text.split('\n')
@@ -92,20 +95,26 @@ def parse_recipe(generated_text):
 def generate_recipe(json_object):
     # Extract information from JSON object
     ingredients = ", ".join(json_object['ingredients'])
-    dietary_restrictions = json_object.get('dietary_restrictions', 'None')
+    dietary_restrictions = json_object.get('dietary_restrictions')
     num_portions = json_object.get('number_of_portions', 4)
     measurement_unit = json_object.get('measurement_unit', 'metric (do not use cups, only metric units)')
     int_kitchens = json_object.get('intKitchens', 'All')
+    only_specified_ingredients = json_object.get('onlyMyIngredients', False)
+    cookingTime = json_object.get('cookingTime', 30)
 
     # Create the prompt for the API
     prompt = f"Please write a recipe that includes the following ingredients: {ingredients}. Very important; if the ingredient is not a food, ignore it!"
-    if dietary_restrictions != 'None':
+    if only_specified_ingredients:
+        prompt += (f" Very important: Only use the ingredients specified. Only add salt, pepper, olive oil and butter")
+    if dietary_restrictions:
         prompt += f" The recipe should be suitable for someone with the following dietary restrictions: {dietary_restrictions}."
     prompt += f" The recipe should use explicitly {measurement_unit} measurement units and no other type of units."
     prompt += f" The recipe should serve {num_portions} portions. "
-    if int_kitchens != 'All':
+    if int_kitchens != 'All kitchen':
         prompt += f" Restrict to recepies from {int_kitchens}."
-    prompt += " Recipe:"
+    prompt += f" Maximum cooking time {cookingTime} min, display cooking time. "
+    prompt += f" Return with information under headlines Recepie, Ingredients and Instructions. Recipe:"
+
 
     # Make API request
     response = openai.Completion.create(
@@ -119,8 +128,11 @@ def generate_recipe(json_object):
 
     # Parse the recipe text
     parsed_recipe = parse_recipe(generated_text)
-    return parsed_recipe
+    parsed_recipe['intKitchens'] = int_kitchens
+    parsed_recipe['dietaryRestrictions'] = dietary_restrictions
+    parsed_recipe['cookingTime'] = cookingTime
 
+    return parsed_recipe
 
 def generate_recipe_image(title):
     response = openai.Image.create(
@@ -131,36 +143,54 @@ def generate_recipe_image(title):
     global image_url
     image_url = response['data'][0]['url']
 
-
 @app.route("/")
 @app.route("/home")
 def main():
     # path = os.path.join(os.path.dirname(__file__), 'Front-End', 'main.html')
-    return render_template('main.html', kitchens = kitchens, restrictions = restrictions, portions = portions)
+   
+    return render_template('main.html', kitchens = kitchens, restrictions = restrictions, portions = portions )
+
+
 
 
 @app.route('/recipe')
 def recipe():
     title = request.args.get("title")
+    print(title)
     ingredients = request.args.get('ingredients')
+    print(ingredients)
     instructions = request.args.get('instructions')
-    recipe_image_url = image_url
-    return render_template('recipe.html', title=title, ingredients=ingredients, instructions=instructions, recipe_image_url=recipe_image_url)
+    print(instructions)
+    intKitchens = request.args.get('intKitchens')
+    print(intKitchens)
+    dietaryRestrictions = request.args.get('dietaryRestrictions')
+    print(dietaryRestrictions)
+    cookingTime = request.args.get('cookingTime')
+    print(cookingTime)
+    recipe_image_url = generate_recipe_image(title)
 
+    return render_template('recipe.html', 
+                            title=title, 
+                            ingredients=ingredients, 
+                            instructions=instructions, 
+                            recipe_image_url=recipe_image_url,
+                            intKitchens=intKitchens,
+                            dietaryRestrictions=dietaryRestrictions,
+                            cookingTime=cookingTime)
 
 @app.route('/page_2')
 def page_2():
     return render_template('page2.html')
 
-
 @app.route('/page_3')
 def page_3():
     return render_template('page3.html')
 
-
 @app.route('/process_prompt', methods=['POST'])
 def process_prompt():
     json_object = request.json
+
+    # Hämta checkbox värdet från "endast angivna ingredienser"
     recipe = generate_recipe(json_object)
     #generate the image here so that we dont get a new image each time we refresh
     generate_recipe_image(recipe.get('title'))
@@ -187,8 +217,7 @@ def handle_email_submission():
             return f"Error: {str(e)}"
 
 
-
-#@app.route('/create_image', methods=['GET'])
+@app.route('/create_image', methods=['GET'])
 def create_image(url):
     # URL of the webpage you want to scrape
     #url = request.args.get('url')

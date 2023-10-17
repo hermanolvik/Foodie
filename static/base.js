@@ -1,7 +1,10 @@
+const darkLogo = document.getElementById('logoDark');
+const lightLogo = document.getElementById('search-logo');
 
 const darkCircle = document.querySelector(".dark-circle");
 const lightedCircle = document.querySelector(".lighted-circle");
 let mouseX, mouseY;
+
 
 
 const toggleSwitchReallyDark = document.querySelector('.realDark');
@@ -16,6 +19,11 @@ const idElements = [ // array av ojects
     { id: 'unit', darkClass: 'special-input-dark', lightClass: 'special-input-text' },
     { id: 'kitchens-id', darkClass: 'special-input-dark', lightClass: 'special-input-text' },
     { id: 'restrictions', darkClass: 'special-input-dark', lightClass: 'special-input-text' },
+    { id: 'headerText', darkClass: 'special-input-dark', lightClass: 'special-input-text' },
+    { id: 'headerText2', darkClass: 'special-input-dark', lightClass: 'special-input-text' },
+    { id: 'cooking-time-id', darkClass: 'special-input-dark', lightClass: 'special-input-text'},
+    { id: 'only-specified-ingredients-label', darkClass: 'special-input-dark', lightClass: 'special-input-text'}
+    
 ];
 
 const classElements = [
@@ -33,7 +41,7 @@ sliders.addEventListener('change', (e) => {
     const isDarkMode = toggleSwitchDark.checked;
     const isReallyDarkMode = toggleSwitchReallyDark.checked;
     
-    console.log(e.pageX, e.pageY);
+    
     saveDarkModeState(isDarkMode, isReallyDarkMode);
 
     const lightedCircle = document.querySelector('.lighted-circle');
@@ -50,7 +58,7 @@ sliders.addEventListener('change', (e) => {
         darkCircle.style.display = "none";
         
     }
-     
+ 
 
     idElements.forEach(element => { // loopa igenom varje element i arrayn
         const el = document.getElementById(element.id); 
@@ -81,6 +89,16 @@ sliders.addEventListener('change', (e) => {
             }
         });
     });  
+
+    if (lightLogo && darkLogo){
+        if(isDarkMode){
+            lightLogo.style.display = "none";
+            darkLogo.style.display = "block";
+        }else{
+            darkLogo.style.display = "none";
+            lightLogo.style.display = "block";
+        }
+    }       
 });
 
 
@@ -122,3 +140,4 @@ function setCircles(x, y){
 }
 
 document.addEventListener("mousemove", onMouseMoveHandler);
+

@@ -44,6 +44,9 @@ document.getElementById('search-button').addEventListener('click', function () {
     const selectedOptionIndex2 = selectElement2.selectedIndex;
     const selectedOption2 = selectElement2.options[selectedOptionIndex2];
     const intKitchens = selectedOption2.value;
+    const cookingTime = document.getElementById('cooking-time-input').value;
+    const onlyMyIngredients = document.getElementById('only-specified-ingredients-checkbox');
+    console.log(cookingTime);
     
     console.log(numPortions);
     console.log(intKitchens);
@@ -53,7 +56,9 @@ document.getElementById('search-button').addEventListener('click', function () {
         dietary_restrictions: dietaryRestrictions,
         number_of_portions: numPortions,
         measurement_unit: unit,
-        intKitchens: intKitchens
+        intKitchens: intKitchens,
+        cookingTime: cookingTime,
+        onlyMyIngredients: onlyMyIngredients.checked
     };
 
     // Send a POST request to the backend
@@ -76,7 +81,8 @@ document.getElementById('search-button').addEventListener('click', function () {
             //Sending the variables up to the app.py for the route of page_1 in flask
 
 
-            location.href = "/recipe?title=" + Title + "&ingredients=" + Ingredients + "&instructions=" + Instructions;
+            location.href = "/recipe?title=" + Title + "&ingredients=" + Ingredients + "&instructions=" + Instructions + "&intKitchens=" + data.intKitchens + "&dietaryRestrictions=" + data.dietaryRestrictions + "&cookingTime=" + data.cookingTime;
+
             // timer
             setTimeout(function () {
                 resetPageAppearance();
@@ -96,6 +102,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const addButton = document.getElementById('add-tag');
     const inputBox = document.getElementById('ingredient-field');
     const tagContainer = document.getElementById('tag-container');
+
+    // let darkModeState = localStorage.getItem('darkMode');
+    // if(darkModeState){
+    //     lightLogo.style.display = "none";
+    //     darkLogo.style.display = "block";
+    // }else{
+    //     darkLogo.style.display = "none";
+    //     lightLogo.style.display = "block";
+    // }
     
 
     function addTag() {
@@ -113,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const newTag = document.createElement('span');
-        const toggleSwitch = document.getElementById('toggleSwitch');
+        const toggleSwitch = document.getElementById('normalDarkToggle');
         newTag.classList.add('tag');
         if (toggleSwitch.checked) {
             newTag.classList.add('dark-tag');
@@ -194,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function() {
     btn.addEventListener('mouseover', function() {
       hoverTimeout = setTimeout(() => {
         btn.classList.add('hovered');
-        btn.textContent = "Feeling Fabolous";
+        btn.textContent = "Feeling Fabulous";
       }, 5000); // 5 sekunder
     });
   
