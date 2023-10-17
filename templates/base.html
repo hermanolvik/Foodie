@@ -14,7 +14,9 @@
     </div>
 
     <header id="Hheader" class="light-mode">
-        <a href="{{ url_for('main') }}" id="logo"><img src="{{ url_for('static', filename='header-logo.png') }}" alt="Header Image" height="50"></a>
+        <a href="{{ url_for('main') }}" id="logo">
+            <img id = "logo-image" src="{{ url_for('static', filename='header-logo.png') }}" alt="Header Image" height="50">
+        </a>
         <nav>
             <a href="{{ url_for('page_3') }}" id="headerText2">About us</a>
         </nav>

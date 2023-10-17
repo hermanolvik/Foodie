@@ -33,6 +33,10 @@
         </div>
     </div>
 
+    <div>
+        <button type="submit" class="share" id="share-button">Download recipe</button>
+    </div>
+
     <div class="ContentWrapper">
         <div class="IngredientsContainer">
             <div id="IngredientsId" class="Ingredients">
@@ -54,6 +58,7 @@
             <p>{{ instructions | safe }}</p>
         </div>
     </div>
+
 </div>
 
 <script src="{{ url_for('static', filename='recipe.js') }}"></script>

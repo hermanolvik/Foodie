@@ -1,8 +1,14 @@
+import io
+from urllib.parse import urljoin, unquote
 import openai
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file
 import smtplib
 from email.mime.text import MIMEText
 import re
+import requests
+from bs4 import BeautifulSoup
+from PIL import Image, ImageDraw, ImageFont, ImageOps
+from io import BytesIO
 
 # Initialize the OpenAI API
 openai.api_key = "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"
@@ -134,8 +140,8 @@ def generate_recipe_image(title):
         n=1,
         size="256x256"
     )
+    global image_url
     image_url = response['data'][0]['url']
-    return image_url
 
 @app.route("/")
 @app.route("/home")
@@ -186,6 +192,8 @@ def process_prompt():
 
     # Hämta checkbox värdet från "endast angivna ingredienser"
     recipe = generate_recipe(json_object)
+    #generate the image here so that we dont get a new image each time we refresh
+    generate_recipe_image(recipe.get('title'))
     return jsonify(recipe)
 
 @app.route('/send_email', methods=['POST'])
@@ -208,5 +216,105 @@ def handle_email_submission():
         except Exception as e:
             return f"Error: {str(e)}"
 
+
+@app.route('/create_image', methods=['GET'])
+def create_image(url):
+    # URL of the webpage you want to scrape
+    #url = request.args.get('url')
+    # Send an HTTP GET request to the URL
+    response = requests.get(url)
+
+    # Check if the request was successful (status code 200)
+    if response.status_code == 200:
+        # Parse the HTML content with BeautifulSoup
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        # Extract text from specific elements (e.g., <h1> and <p>)
+        title_text = soup.find('h1').get_text()
+        ingredients_text = soup.find(id='IngredientsId')
+        instructions_text = soup.find(class_='instructions')
+
+        ingredients = ingredients_text.get_text() if ingredients_text else "Ingredients not found"
+        instructions = instructions_text.get_text() if ingredients_text else "Instructions not found"
+
+        img_tag = soup.find('img', id='recipe-image')
+        img_logo = soup.find('img', id='logo-image')
+
+        if img_tag:
+            img_url = img_tag.get('src')
+            img_url = urljoin(url, img_url)
+
+            img_logo_url = img_logo.get('src')
+            img_logo_url = urljoin(url, img_logo_url)
+
+            # Send an HTTP GET request for the image
+            img_response = requests.get(img_url)
+            img_logo_response = requests.get(img_logo_url)
+
+            # Check if the image download was successful
+            if img_response.status_code == 200:
+
+                bordered_image = Image.new('RGB', (1300, 750), color='white')
+
+                # Create an image with the extracted text
+                image = Image.new('RGB', (600, 600), (255, 157, 130))
+                draw = ImageDraw.Draw(image)
+                # font = ImageFont.load_default()
+
+                # Set the text color and size
+                text_color = 'black'
+
+                title_font = ImageFont.truetype('arial.ttf', 35)
+                ingredients_font = ImageFont.truetype('arial.ttf', 20)
+                instructions_font = ImageFont.truetype('arial.ttf', 20)
+
+                title_pos = (20, 20)
+                ingredients_pos = (20, 50)
+                instructions_pos = (200, 200)
+
+                draw.text(title_pos, title_text, fill=text_color, font=title_font)
+                draw.text(ingredients_pos, ingredients, fill=text_color, font=ingredients_font, spacing=-2)
+                # draw.text(instructions_pos, instructions, fill=text_color, font=instructions_font)
+
+                # Open and paste the downloaded image onto the generated image
+                img = Image.open(BytesIO(img_response.content))
+                resized_img = img.resize((600, 600))
+                bordered_image.paste(resized_img, (650, 100))  # Adjust the position as needed
+
+                img_logo = Image.open(BytesIO(img_logo_response.content))
+                img_logo = img_logo.convert('RGBA')
+                resized_logo = img_logo.resize((209, 64))
+                bordered_image.paste(resized_logo, (550, 20), resized_logo)
+
+                bordered_image.paste(image, (50, 100))
+
+                # Save the image for debugging
+                #bordered_image.save('share_image.png')
+
+                img_io = io.BytesIO()
+                bordered_image.save(img_io, 'PNG')
+                img_io.seek(0)
+
+                return img_io
+
+            else:
+                print(f"Failed to download image from {img_url}")
+        else:
+            print("Image not found on the webpage.")
+    else:
+        print("Failed to retrieve the webpage. Status code:", response.status_code)
+
+
+@app.route('/download_image')
+def download_image():
+    # Generate the image
+    img_io = create_image(request.args.get('url'))
+
+    # Send the image as a response
+    return send_file(img_io, as_attachment=True, download_name='generated_image.png')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+
+
