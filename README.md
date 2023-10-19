@@ -54,5 +54,5 @@ a base.css witch all pages abide by.
 HTML files:
 
 Like the .js and .css files the html files are created for each page with a base.html that translates
-to all other .html files. All thies files are for setting up the structure of the page.
+to all other .html files. All these files are for setting up the structure of the page.
 
