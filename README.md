@@ -21,7 +21,7 @@ generates recipes based on user input. Users can specify ingredients, dietary re
 measurement units, and number of portions to receive a custom recipe. The application utilizes 
 the OpenAI API for text and image generation.
 
-This Python script utilizes the OpenAI API to generate recipes based on user-provided ingredients 
+App.py also has a python script that utilizes the OpenAI API to generate recipes based on user-provided ingredients 
 and dietary restrictions. Users can input a list of ingredients and any dietary restrictions, and 
 the script will generate a recipe incorporating those ingredients while considering the specified 
 restrictions.
@@ -30,9 +30,6 @@ Dependencies:
 Flask
 OpenAI API (Ensure you have a valid API key)
 Python 3.x
-
-backend.py:
-
 
 
 base.js:
