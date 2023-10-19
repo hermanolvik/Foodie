@@ -16,11 +16,15 @@ In this section the code and the important files will be explained. This README 
 who wants to learn or work on the code.
 
 app.py:
-
 The app.py file is for starting and running the program. This is a simple web application that 
 generates recipes based on user input. Users can specify ingredients, dietary restrictions, 
 measurement units, and number of portions to receive a custom recipe. The application utilizes 
 the OpenAI API for text and image generation.
+
+This Python script utilizes the OpenAI API to generate recipes based on user-provided ingredients 
+and dietary restrictions. Users can input a list of ingredients and any dietary restrictions, and 
+the script will generate a recipe incorporating those ingredients while considering the specified 
+restrictions.
 
 Dependencies:
 Flask
@@ -29,10 +33,7 @@ Python 3.x
 
 backend.py:
 
-This Python script utilizes the OpenAI API to generate recipes based on user-provided ingredients 
-and dietary restrictions. Users can input a list of ingredients and any dietary restrictions, and 
-the script will generate a recipe incorporating those ingredients while considering the specified 
-restrictions.
+
 
 base.js:
 
