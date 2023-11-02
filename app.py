@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from io import BytesIO
 
-# Initialize the OpenAI API
+# This is an example API key
 openai.api_key = "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"
 
 # Initialize Flask
