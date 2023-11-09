@@ -1,56 +1,6 @@
-# group-6
-Socialt kontrakt för projektgrupp 6
-https://docs.google.com/document/d/1x8QdunHEUfWWoGV40BNKZhHgLF4wtAidZKqEbXIcK2Y/edit?usp=sharing
+Foodie is a simple web application built with Bootstrap 5, Python Flask, and OpenAI API that generates recipes based on input ingredients, dietary restrictions, and other parameters.
 
-Dagordning
-https://docs.google.com/document/d/1LjOwwerTcHhVaNp7A_ZN2pURU9monKpAYVtsMDyLDUM/edit?usp=sharing
-
-Project Scope
-https://docs.google.com/document/d/1PmCGpc6AH234PUaX5dEEh44FI4PlxPoJEqNkFn5nh_g/edit?usp=sharing
-
-Above is the necessary information to understand our work process
-
-------------------------------------------------------------------------------------------------
-
-In this section the code and the important files will be explained. This README is for an individual
-who wants to learn or work on the code.
-
-app.py:
-The app.py file is for starting and running the program. This is a simple web application that 
-generates recipes based on user input. Users can specify ingredients, dietary restrictions, 
-measurement units, and number of portions to receive a custom recipe. The application utilizes 
-the OpenAI API for text and image generation.
-
-App.py also has a python script that utilizes the OpenAI API to generate recipes based on user-provided ingredients 
-and dietary restrictions. Users can input a list of ingredients and any dietary restrictions, and 
-the script will generate a recipe incorporating those ingredients while considering the specified 
-restrictions.
-
-Dependencies:
-Flask
-OpenAI API (Ensure you have a valid API key)
-Python 3.x
-
-
-base.js:
-
-This file is used as a base for all the .js pages. This means that what is implemented in base will be 
-portrayed on all pages. Here we want to ensure that all pages have the dark mode and that it is stored 
-between different pages
-
-Rest of the .js files:
-
-All .js files are created so that each page has its own .js files, due to the fact that each page needs
-its own function/functions to operate correctly. Each .js file has on objective and that is to operate
-only when needed and on the correct page. 
-
-CSS files:
-
-Like with the .js files each page has a css files this is just styling for the pages. Here we also have
-a base.css witch all pages abide by. 
-
-HTML files:
-
-Like the .js and .css files the html files are created for each page with a base.html that translates
-to all other .html files. All these files are for setting up the structure of the page.
-
+Preview:
+![Screenshot 2023-11-09 at 11 30 50](https://github.com/hermanolvik/Foodie/assets/72079200/1c16898f-0669-4654-b014-2e01b63e5b03)
+![Screenshot 2023-11-09 at 11 31 28](https://github.com/hermanolvik/Foodie/assets/72079200/ef256e33-a0f9-4676-ad04-b284886ef146)
+![Screenshot 2023-11-09 at 11 31 50](https://github.com/hermanolvik/Foodie/assets/72079200/aa04945b-e20b-43e2-a586-9478799c5052)
